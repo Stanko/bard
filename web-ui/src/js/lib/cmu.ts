@@ -1,7 +1,7 @@
 export let dictionary: Record<string, string[]> = {};
 
 const init = async () => {
-  dictionary = await fetch('/cmu.json').then((res) => res.json());
+  dictionary = await fetch('./cmu.json').then((res) => res.json());
 };
 
 init();
