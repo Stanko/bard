@@ -23,7 +23,7 @@ let stop = false;
 
 const loadNGrams = async (path: string, nGramsLengths: [2, 3, 4]) => {
   const promises = nGramsLengths.map((n) => {
-    return fetch(`/ngrams/${path}/ngrams-${n}.json`).then((response) =>
+    return fetch(`./ngrams/${path}/ngrams-${n}.json`).then((response) =>
       response.json()
     );
   });
