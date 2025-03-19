@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "bunx --bun vite",
-    "build": "bunx --bun vite build",
+    "build": "rm -rf ../docs && bunx --bun vite build && touch ../docs/.nojekyll",
     "preview": "bunx --bun vite preview"
   },
   "devDependencies": {
