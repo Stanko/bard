@@ -92,7 +92,7 @@ const loadCartridge = () => {
   const dataset = getSelectedDataset() as keyof typeof map;
   const color = map[dataset];
 
-  $cartridge.src = `/${color}.gif?cache=${Date.now()}`;
+  $cartridge.src = `./${color}.gif?cache=${Date.now()}`;
   $cartridges.replaceChildren($cartridge);
 };
 

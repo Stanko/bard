@@ -182,14 +182,14 @@ const glitchStaticAnimation = (src: string, height: number): string[] => {
   return html;
 };
 
-// const { css, html } = glitch('/bard.png', 62);
+// const { css, html } = glitch('./bard.png', 62);
 
 // CSS
 // const styleEl = document.createElement('style');
 // styleEl.innerHTML = css.join('\n');
 // document.head.appendChild(styleEl);
 
-const html = glitchStaticAnimation('/bard.png', 62);
+const html = glitchStaticAnimation('./bard.png', 62);
 
 // HTML
 const $glitch = document.querySelector('.glitch') as HTMLElement;
