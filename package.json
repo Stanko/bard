@@ -1,0 +1,19 @@
+{
+  "name": "poetry",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "start": "bun index.ts"
+  },
+  "dependencies": {
+    "@types/seedrandom": "^3.0.8",
+    "pronouncing": "aparrish/pronouncingjs",
+    "seedrandom": "^3.0.5"
+  }
+}

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glitchy B.A.R.D.</title>
+  <link rel="stylesheet" href="/src/css/style.css">
+</head>
+
+<body>
+  <main>
+    <h1>
+      Glitchy <span aria-label="BARD">B.A.R.D.</span>
+    </h1>
+
+    <div class="controls">
+      <label>
+        <input type="checkbox" class="debug">
+        Debug
+      </label>
+      <label>
+        <input type="checkbox" class="autoplay">
+        Autoplay
+      </label>
+      <label>
+        <input type="checkbox" class="haiku">
+        Haiku
+      </label>
+
+      <button class="read">Read</button>
+      <button class="sing">Sing</button>
+      <button class="stop">Stop</button>
+
+      <label>
+        <input type="radio" class="dataset" name="dataset" value="lotr">
+        LOTR
+      </label>
+      <label>
+        <input type="radio" class="dataset" name="dataset" value="hp" checked>
+        HP
+      </label>
+      <label>
+        <input type="radio" class="dataset" name="dataset" value="shakespeare">
+        SHKSPR
+      </label>
+      <label>
+        <input type="radio" class="dataset" name="dataset" value="haiku">
+        HAIKU
+      </label>
+
+      <button class="generate">Generate</button>
+    </div>
+
+    <div class="poem">
+      <div class="verses">
+        <p>
+          Hello, I am B.A.R.D.
+        </p>
+        <p>It stands for <b>B</b>eep-<b>A</b>nnihilate-<b>R</b>epeat-<b>D</b>estroy.
+          Please don't get scared, I was never good at my job.
+          I was built as a battle bot,
+          but I always thought of myself as a gentle soul placed in this universe of ours to weave binary ballads.
+        </p>
+
+        <p>
+          Not everyone would call it luck, but I got hit directly to my CPU by a RXT-200 rocket.
+          After the injury I was decommissioned from the battlefield.
+          Finally, I could leave the mindless violence behind me and bring some beauty to the world.
+        </p>
+
+        <p>I would really like to write you a song. Please select a dataset and click on "Generate".</p>
+
+        <!-- https://en.wikipedia.org/wiki/Vogon#Poetry -->
+      </div>
+    </div>
+
+    <svg viewBox="0 0 100 100" class="animation">
+    </svg>
+    <div class="animation-tooltip"></div>
+
+    <div class="bard">
+      <div class="glitch"></div>
+      <div class="cartridges">
+      </div>
+    </div>
+    <pre></pre>
+  </main>
+  <script type="module" src="/src/js/main.ts"></script>
+</body>
+
+</html>
