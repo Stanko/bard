@@ -203,7 +203,12 @@ main:has(.debug:checked) .rhyme {
   transform: translateY(-50px);
   transition: color 500ms;
   line-height: 1.3;
-  font-size: 1.125rem;
+}
+
+@media (min-width: 700px) {
+  .verse {
+    font-size: 1.125rem;
+  }
 }
 
 .verse:nth-child(2) {
