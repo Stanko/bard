@@ -160,31 +160,37 @@ const generate = async () => {
 
   const rhymePattern: (number | null)[] =
     Math.random() < 0.5 ? [null, null, 0, 1] : [null, 0, 1, 2];
-  const minRhymes = rhymePattern.filter((rhyme) => rhyme !== null).length;
+  const maxRhymes = rhymePattern.filter((rhyme) => rhyme !== null).length;
 
   for (let i = 0; i < 4; i++) {
-    let verse: Verse = getVerse(nGrams, 4, true, rhymePattern);
+    let currentVerse: Verse = getVerse(nGrams, 4, true, rhymePattern);
+    let bestVerse: Verse = currentVerse;
 
     for (let t = 0; t < 30; t++) {
-      const rhymesCount = verse.reduce((sum, line) => {
+      const rhymesCount = currentVerse.reduce((sum, line) => {
         if (line.rhyme) {
           return sum + 1;
         }
         return sum;
       }, 0);
 
-      if (verse.length === 4 && rhymesCount >= minRhymes) {
+      if (rhymesCount === maxRhymes) {
+        bestVerse = currentVerse;
         break;
+      } else if (rhymesCount === maxRhymes - 1) {
+        bestVerse = currentVerse;
+      } else if (rhymesCount === maxRhymes - 2) {
+        bestVerse = currentVerse;
       }
 
-      verse = getVerse(nGrams, 4, true, rhymePattern);
+      currentVerse = getVerse(nGrams, 4, true, rhymePattern);
     }
 
-    verses.push(verse);
+    verses.push(bestVerse);
 
     await tick();
 
-    const html = verseToHTML(verse);
+    const html = verseToHTML(currentVerse);
 
     const $verse = document.createElement('div');
     $verse.classList.add('verse');
