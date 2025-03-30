@@ -12,8 +12,8 @@
 
 
   <meta name="description" content="An experiment in robot poetry.">
-  <script type="module" crossorigin src="./assets/index-C-icpdC9.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-ZT5oN-rQ.css">
+  <script type="module" crossorigin src="./assets/index-zifuvHrP.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Cs9yTyIm.css">
 </head>
 
 <body>
@@ -23,36 +23,44 @@
     </h1>
 
     <div class="controls">
-      <label>
-        <input type="checkbox" class="debug">
-        Debug
-      </label>
-      <label>
-        <input type="checkbox" class="autoplay">
-        Autoplay
-      </label>
-      <label>
-        <input type="checkbox" class="haiku">
-        Haiku
-      </label>
+      <div>
+        <label>
+          <input type="checkbox" class="debug">
+          Debug
+        </label>
+        <label>
+          <input type="checkbox" class="autoplay">
+          Autoplay
+        </label>
+        <label>
+          <input type="checkbox" class="haiku">
+          Haiku
+        </label>
+      </div>
 
-      <button class="read">Read</button>
-      <button class="sing">Sing</button>
-      <button class="stop">Stop</button>
+      <div>
+        <button class="read">Read</button>
+        <button class="sing">Sing</button>
+        <button class="stop">Stop</button>
+      </div>
+      <div>
+        <div>Dataset:</div>
+        <label>
+          <input type="radio" class="dataset" name="dataset" value="lotr">
+          LOTR
+        </label>
+        <label>
+          <input type="radio" class="dataset" name="dataset" value="hp" checked>
+          HP
+        </label>
+        <label>
+          <input type="radio" class="dataset" name="dataset" value="shakespeare">
+          SHKSPR
+        </label>
+      </div>
+    </div>
 
-      <label>
-        <input type="radio" class="dataset" name="dataset" value="lotr">
-        LOTR
-      </label>
-      <label>
-        <input type="radio" class="dataset" name="dataset" value="hp" checked>
-        HP
-      </label>
-      <label>
-        <input type="radio" class="dataset" name="dataset" value="shakespeare">
-        SHKSPR
-      </label>
-
+    <div>
       <button class="generate">Generate</button>
     </div>
 

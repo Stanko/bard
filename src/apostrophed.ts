@@ -63,7 +63,6 @@ export const apostrophed: { [key: string]: string } = {
   THEYWOULD: "THEY'D",
   WASNT: "WASN'T",
   WECOULD: "WE'D",
-  WED: "WE'D",
   WEHAD: "WE'D",
   WELL: "WE'LL",
   WERE: "WE'RE",
