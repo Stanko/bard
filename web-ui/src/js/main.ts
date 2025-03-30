@@ -160,9 +160,26 @@ const generate = async () => {
 
   const rhymePattern: (number | null)[] =
     Math.random() < 0.5 ? [null, null, 0, 1] : [null, 0, 1, 2];
+  const minRhymes = rhymePattern.filter((rhyme) => rhyme !== null).length;
 
   for (let i = 0; i < 4; i++) {
-    const verse = getVerse(nGrams, 4, true, rhymePattern);
+    let verse: Verse = getVerse(nGrams, 4, true, rhymePattern);
+
+    for (let t = 0; t < 30; t++) {
+      const rhymesCount = verse.reduce((sum, line) => {
+        if (line.rhyme) {
+          return sum + 1;
+        }
+        return sum;
+      }, 0);
+
+      if (verse.length === 4 && rhymesCount >= minRhymes) {
+        break;
+      }
+
+      verse = getVerse(nGrams, 4, true, rhymePattern);
+    }
+
     verses.push(verse);
 
     await tick();

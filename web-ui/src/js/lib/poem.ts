@@ -8,7 +8,7 @@ const getSentenceOfLength = (
   minLength: number = 25,
   maxLength: number = 35,
   reversed: boolean = false,
-  maxTries: number = 1000
+  maxTries: number = 10000
 ): string[] => {
   let tries = 0;
 
@@ -58,8 +58,7 @@ export const getVerse = (
   rhymePattern: (number | null)[] = [null, null, 0, 1],
   // rhymePattern: (number | null)[] = [null, 0, 0, 0],
   // rhymePattern: (number | null)[] = [null, 0, 1, 2],
-  minSimilarity: number = 3,
-  maxTries: number = 1000
+  maxTries: number = 10000
 ): Verse => {
   const verse: Verse = [];
 
@@ -110,7 +109,7 @@ export const getVerse = (
         nGrams,
         rhyme ? rhyme.rhyme : '',
         25,
-        30,
+        35,
         reversed,
         maxTries
       );
@@ -190,7 +189,7 @@ function countSyllablesHeuristic(word: string): number {
 export const getHaiku = (
   nGrams: NGram[],
   syllables: [number, number, number] = [3, 5, 3],
-  maxTries: number = 100
+  maxTries: number = 1000
 ): Verse => {
   const totalSyllables = syllables.reduce((sum, s) => sum + s, 0);
 
