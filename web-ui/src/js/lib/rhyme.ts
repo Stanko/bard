@@ -1,211 +1,247 @@
 import { dictionary } from './cmu';
 
-const phoneticSimilarity: Record<string, Record<string, number>> = {
-  // Vowels (with varying degrees of similarity)
-  AE: { EH: 0.95, IH: 0.85, IY: 0.75, AA: 0.7 },
-  EH: { AE: 0.95, IH: 0.9, IY: 0.8, AA: 0.7 },
-  IH: { AE: 0.85, EH: 0.9, IY: 0.95, UH: 0.7 },
-  IY: { AE: 0.75, EH: 0.8, IH: 0.95 },
-  AA: { AO: 0.9, UH: 0.8, UW: 0.7, AE: 0.7, EH: 0.7 },
-  AO: { AA: 0.9, UH: 0.85, UW: 0.75 },
-  UH: { AA: 0.8, AO: 0.85, UW: 0.9, IH: 0.7 },
-  UW: { AA: 0.7, AO: 0.75, UH: 0.9 },
-  AW: { AY: 0.9, EY: 0.8, OW: 0.75, OY: 0.7 },
-  AY: { AW: 0.9, EY: 0.85, OW: 0.7, OY: 0.75 },
-  EY: { AW: 0.8, AY: 0.85, OW: 0.9, OY: 0.8 },
-  OW: { AW: 0.75, AY: 0.7, EY: 0.9, OY: 0.95 },
-  OY: { AW: 0.7, AY: 0.75, EY: 0.8, OW: 0.95 },
-  AH: { ER: 0.9 },
-  ER: { AH: 0.9 },
-
-  // Consonants (with varying degrees of similarity)
-  B: { P: 0.65, M: 0.5 },
-  P: { B: 0.65, M: 0.5 },
-  M: { B: 0.5, P: 0.5, N: 0.55 },
-  N: { M: 0.55, NG: 0.6, L: 0.5, R: 0.5 },
-  NG: { N: 0.6, G: 0.5, K: 0.5 },
-  D: { T: 0.65, DH: 0.55 },
-  T: { D: 0.65, TH: 0.55 },
-  G: { K: 0.65, NG: 0.5 },
-  K: { G: 0.65, NG: 0.5 },
-  V: { F: 0.65, TH: 0.5 },
-  F: { V: 0.65, TH: 0.5 },
-  Z: { S: 0.65, ZH: 0.55 },
-  S: { Z: 0.65, SH: 0.55 },
-  ZH: { SH: 0.65, Z: 0.55 },
-  SH: { ZH: 0.65, S: 0.55 },
-  JH: { CH: 0.65, DH: 0.5 },
-  CH: { JH: 0.65, TH: 0.5 },
-  L: { R: 0.55, N: 0.5 },
-  R: { L: 0.55, N: 0.5 },
-  TH: { DH: 0.6, T: 0.55, F: 0.5, V: 0.5 },
-  DH: { TH: 0.6, D: 0.55, JH: 0.5 },
-  W: { WH: 0.65 },
-  WH: { W: 0.65 },
-};
-
 const isVowel = (phoneme: string): boolean => {
-  return [
-    'AE',
-    'EH',
-    'IH',
-    'IY',
-    'AA',
-    'AO',
-    'UH',
-    'UW',
-    'AW',
-    'AY',
-    'EY',
-    'OW',
-    'OY',
-    'AH',
-    'ER',
-  ].includes(phoneme);
-};
-
-export const countRhymePhoneticSimilarity = (
-  phonemes1?: string[],
-  phonemes2?: string[],
-  usePhoneticSimilarity: boolean = true
-): number => {
-  if (!phonemes1 || !phonemes2) {
-    return 0;
-  }
-
-  let similarity = 0;
-
-  // Reverse the phoneme arrays for comparison from the end
-  const p1 = phonemes1.toReversed();
-  const p2 = phonemes2.toReversed();
-
-  // Determine the minimum length to avoid out-of-bounds errors
-  const n = Math.min(p1.length, p2.length);
-
-  // Iterate through the phonemes
-  for (let i = 0; i < n; i++) {
-    const phoneme1 = p1[i];
-    const phoneme2 = p2[i];
-
-    // Check if the phoneme has stress (indicated by a digit)
-    const hasStress = phoneme1.match(/\d/);
-
-    // Remove stress digits from phonemes for comparison
-    const phonemeWithoutStress1 = p1[i].replace(/\d/g, '');
-    const phonemeWithoutStress2 = p2[i].replace(/\d/g, '');
-
-    // Exact match with stress (only vowels can have stress)
-    if (phoneme1 === phoneme2 && hasStress) {
-      similarity += 3; // Higher weight for stressed vowel match
-    }
-    // Exact match without stress
-    else if (phonemeWithoutStress1 === phonemeWithoutStress2) {
-      if (isVowel(phonemeWithoutStress1)) {
-        similarity += 2; // Higher weight for vowel match
-      } else {
-        similarity += 1.5; // Lower weight for consonant match
-      }
-    }
-    // Phonetic similarity match
-    else if (usePhoneticSimilarity) {
-      const similarPhonemes = phoneticSimilarity[phonemeWithoutStress1];
-
-      if (similarPhonemes && similarPhonemes[phonemeWithoutStress2]) {
-        let weight = similarPhonemes[phonemeWithoutStress2];
-
-        similarity += weight;
-      }
-    } else {
-      break; // Break if no similarity is found
-    }
-  }
-
-  return similarity;
+  return /^[AEIOU]/.test(phoneme);
 };
 
 export type SimilarityResult = {
   word: string;
-  similarity: number;
+  rhyme: string;
+  phonemes: string;
+  phonemesRhyme: string;
+  score: number;
+  type?: RhymeType;
 };
+
+// Define rhyme types with specific characteristics
+type RhymeType =
+  | 'perfect' // Identical from stressed vowel to end (LIGHT/BRIGHT)
+  | 'family' // Similar phonetic ending with minimal variation (SEEM/DREAM)
+  | 'additive' // Extra syllable(s) at end (FIND/MINDED)
+  | 'subtractive' // Missing syllable(s) at end (WONDER/BLUNDER/THUNDER)
+  | 'assonance' // Same vowel sounds, different consonants (LAKE/MATE)
+  | 'consonance' // Same consonant pattern, different vowels (MILL/MOLE)
+  | 'slant'; // Partial match with significant differences (STONE/GONE)
+
+// Extract stressed syllable index and all following phonemes
+const extractRhymingPart = (
+  phonemes: string[]
+): {
+  stressIndex: number;
+  rhymePart: string[];
+} => {
+  // Find primary stress (0) or secondary stress (1/2) if no primary exists
+  let stressIndex = phonemes.findIndex((p) => p.includes('0'));
+
+  // If no primary stress, look for secondary stress
+  if (stressIndex === -1 || stressIndex >= phonemes.length - 2) {
+    stressIndex = phonemes.findIndex((p) => p.includes('1'));
+  }
+  if (stressIndex === -1 || stressIndex >= phonemes.length - 2) {
+    stressIndex = phonemes.findIndex((p) => p.includes('2'));
+  }
+
+  // If still no stress found, use the last vowel
+  if (stressIndex === -1) {
+    for (let i = phonemes.length - 1; i >= 0; i--) {
+      if (isVowel(phonemes[i])) {
+        stressIndex = i;
+        break;
+      }
+    }
+  }
+
+  // If still nothing found, use last syllable as fallback
+  if (stressIndex === -1 && phonemes.length > 0) {
+    stressIndex = Math.max(0, phonemes.length - 2);
+  }
+
+  return {
+    stressIndex,
+    rhymePart: phonemes.slice(stressIndex),
+  };
+};
+
+// Normalize phoneme by removing stress markers
+const normalizePhoneme = (phoneme: string): string => {
+  return phoneme.replace(/[0-9]/g, '');
+};
+
+// Determine rhyme type based on phonological patterns
+const determineRhymeType = (
+  rhymePart1: string[],
+  rhymePart2: string[]
+): { type: RhymeType; score: number } => {
+  // Normalize both rhyme parts for comparison
+  const normalized1 = rhymePart1.map(normalizePhoneme);
+  const normalized2 = rhymePart2.map(normalizePhoneme);
+
+  // Get the stressed vowel phonemes (first element should be a vowel in rhyme part)
+  const stressedVowel1 = normalized1[0];
+  const stressedVowel2 = normalized2[0];
+
+  // Perfect match: exactly the same phonemes from stressed vowel to end
+  if (normalized1.join('') === normalized2.join('')) {
+    return { type: 'perfect', score: 100 };
+  }
+
+  // Check vowel match at stress position (essential for most rhyme types)
+  const stressedVowelMatch = stressedVowel1 === stressedVowel2;
+
+  if (!stressedVowelMatch) {
+    // Different stressed vowels means not a strong rhyme
+    // Check for consonance (similar consonant patterns)
+    const consonantPattern1 = normalized1.filter((p) => !isVowel(p)).join('');
+    const consonantPattern2 = normalized2.filter((p) => !isVowel(p)).join('');
+
+    if (
+      consonantPattern1 === consonantPattern2 &&
+      consonantPattern1.length > 1
+    ) {
+      return { type: 'consonance', score: 40 };
+    }
+
+    // Check for assonance (similar vowel patterns)
+    const vowelPattern1 = normalized1.filter((p) => isVowel(p)).join('');
+    const vowelPattern2 = normalized2.filter((p) => isVowel(p)).join('');
+
+    if (vowelPattern1 === vowelPattern2 && vowelPattern1.length > 0) {
+      return { type: 'assonance', score: 50 };
+    }
+
+    // Weak match - slant rhyme
+    return { type: 'slant', score: 20 };
+  }
+
+  // Length difference to check for additive/subtractive rhymes
+  const lengthDiff = normalized1.length - normalized2.length;
+
+  // Similar phonemes with the same stressed vowel
+  if (Math.abs(lengthDiff) <= 1) {
+    // Count matching phonemes
+    let matchCount = 0;
+    const minLength = Math.min(normalized1.length, normalized2.length);
+
+    for (let i = 0; i < minLength; i++) {
+      if (normalized1[i] === normalized2[i]) {
+        matchCount++;
+      }
+    }
+
+    // Family rhyme: mostly matching with minor variations
+    if (matchCount >= minLength - 1) {
+      return { type: 'family', score: 85 };
+    }
+  }
+
+  // Additive rhyme (one has extra syllables)
+  if (lengthDiff > 0) {
+    // Check if shorter one is contained at the beginning of longer one
+    const isContained = normalized2.every((p, i) => p === normalized1[i]);
+    if (isContained) {
+      return { type: 'additive', score: 75 };
+    }
+  } else if (lengthDiff < 0) {
+    // Check if shorter one is contained at the beginning of longer one
+    const isContained = normalized1.every((p, i) => p === normalized2[i]);
+    if (isContained) {
+      return { type: 'subtractive', score: 75 };
+    }
+  }
+
+  // Default to slant rhyme if nothing else matches
+  return { type: 'slant', score: 30 };
+};
+
+// At the top of getRhymes
+const MIN_RHYME_TAIL_LENGTH = 2;
 
 export const getRhymes = (
   word: string | string[],
-  minSimilarity: number = 5,
-  usePhoneticSimilarity: boolean = true,
-  maxRhymes: number = 40
+  options: {
+    maxResults?: number;
+    includeTypes?: RhymeType[];
+    minScore?: number;
+  } = {}
 ): SimilarityResult[] => {
-  let phonemes: string[];
+  const {
+    maxResults = 40,
+    includeTypes = [
+      'perfect',
+      // 'family',
+      // 'additive',
+      // 'subtractive'
+    ],
+    minScore = 50,
+  } = options;
 
-  // Convert the input word(s) to phonemes
+  // Get phonemes for the input word
+  let wordPhonemes: string[];
+  let wordStr: string;
+
   if (Array.isArray(word)) {
-    phonemes = word
-      // If the word is not found in the dictionary, return an array of underscores
-      .map((w) => dictionary[w] || w.split('').map((_) => ''))
+    wordPhonemes = word
+      .map((w) => dictionary[w.toUpperCase()] || [])
+      .filter((p) => p.length > 0)
       .flat();
+    wordStr = word.join(' ');
   } else {
-    phonemes = dictionary[word];
+    wordPhonemes = dictionary[word.toUpperCase()] || [];
+    wordStr = word;
   }
 
-  // Return an empty array if no phonemes are found
-  if (!phonemes) {
+  // Return empty if word not found in dictionary
+  if (!wordPhonemes || wordPhonemes.length === 0) {
     return [];
   }
+  // Extract the rhyming part (from stressed vowel to end)
+  const { stressIndex, rhymePart } = extractRhymingPart(wordPhonemes);
 
   const results: SimilarityResult[] = [];
 
-  // Iterate through the dictionary to find rhymes
-  Object.keys(dictionary).forEach((key) => {
-    const currentPhonemes = dictionary[key];
-
-    // Skip if the word is the same as the input word
-    if (phonemes.join('') === currentPhonemes.join('')) {
+  // Search dictionary for potential rhymes
+  Object.entries(dictionary).forEach(([dictWord, dictPhonemes]) => {
+    // Skip same word
+    if (dictWord.toUpperCase() === wordStr.toUpperCase()) {
       return;
     }
 
-    // Calculate the phonetic similarity
-    const similarity = countRhymePhoneticSimilarity(
-      phonemes,
-      currentPhonemes,
-      usePhoneticSimilarity
-    );
+    // Extract potential rhyme part
+    // Extract potential rhyme part
+    const { stressIndex: dictStressIndex, rhymePart: dictRhymePart } =
+      extractRhymingPart(dictPhonemes);
 
-    // Add to results if similarity meets the minimum threshold
-    if (similarity >= minSimilarity) {
+    // Skip if rhyme part is too short to be meaningful
+    if (dictRhymePart.length < MIN_RHYME_TAIL_LENGTH) {
+      return;
+    }
+
+    // Also skip the input word itself if it's too short
+    if (rhymePart.length < MIN_RHYME_TAIL_LENGTH) {
+      return [];
+    }
+
+    // Skip if no stress info found
+    if (dictRhymePart.length === 0) {
+      return;
+    }
+
+    // Determine rhyme type and score
+    const { type, score } = determineRhymeType(rhymePart, dictRhymePart);
+
+    // Filter by requested types and minimum score
+    if (includeTypes.includes(type) && score >= minScore) {
       results.push({
-        word: key,
-        similarity,
+        word: wordStr,
+        rhyme: dictWord,
+        type,
+        score,
+        phonemes: wordPhonemes.join(' '),
+        phonemesRhyme: dictPhonemes.join(' '),
       });
     }
   });
 
-  // Sort the results by similarity in descending order
-  const sorted = results.sort((a, b) => b.similarity - a.similarity);
-
-  // Return the top results based on maxRhymes limit
-  if (maxRhymes) {
-    return sorted.slice(0, maxRhymes);
-  }
-
-  return sorted;
-};
-
-export const getRandomRhyme = (
-  word: string,
-  minSimilarity: number = 5
-): string => {
-  const rhymes = getRhymes(word, minSimilarity);
-  const totalSimilarity = rhymes.reduce(
-    (sum, rhyme) => sum + rhyme.similarity,
-    0
-  );
-  let randomValue = Math.random() * totalSimilarity;
-
-  for (const rhyme of rhymes) {
-    if (randomValue < rhyme.similarity) {
-      return rhyme.word;
-    }
-    randomValue -= rhyme.similarity;
-  }
-
-  return '';
+  // Sort by score and return top results
+  return results.sort((a, b) => b.score - a.score).slice(0, maxResults);
 };

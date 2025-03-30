@@ -111,6 +111,10 @@ export const generateSentence = (
     return [];
   }
 
+  if (startWord && startWord.length < 3) {
+    startWord = '';
+  }
+
   const firstToken = reversed ? END_TOKEN : START_TOKEN;
   const lastToken = reversed ? START_TOKEN : END_TOKEN;
 

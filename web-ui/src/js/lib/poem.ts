@@ -26,26 +26,25 @@ const getSentenceOfLength = (
   return [];
 };
 
-export const getRandomFromRhymes = (rhymes: SimilarityResult[]): string => {
-  const totalSimilarity = rhymes.reduce(
-    (sum, rhyme) => sum + rhyme.similarity,
-    0
-  );
+export const getRandomFromRhymes = (
+  rhymes: SimilarityResult[]
+): SimilarityResult | null => {
+  const totalSimilarity = rhymes.reduce((sum, rhyme) => sum + rhyme.score, 0);
   let randomValue = Math.random() * totalSimilarity;
 
   for (const rhyme of rhymes) {
-    if (randomValue < rhyme.similarity) {
-      return rhyme.word;
+    if (randomValue < rhyme.score) {
+      return rhyme;
     }
-    randomValue -= rhyme.similarity;
+    randomValue -= rhyme.score;
   }
 
-  return '';
+  return null;
 };
 
 export type VerseLine = {
   line: string[];
-  rhyme: string;
+  rhyme: SimilarityResult | null;
   wordToRhymeWith: string;
   maxScore?: number;
 };
@@ -64,6 +63,8 @@ export const getVerse = (
 ): Verse => {
   const verse: Verse = [];
 
+  let usedRhymeWords: string[] = [];
+
   for (let i = 0; i < linesCount; i++) {
     const pattern = rhymePattern[i % rhymePattern.length];
 
@@ -72,25 +73,42 @@ export const getVerse = (
 
     if (pattern !== null) {
       const lineToRhymeWith = verse[pattern]?.line;
+
       if (!lineToRhymeWith) {
         continue;
       }
+
       wordToRhymeWith = lineToRhymeWith[lineToRhymeWith.length - 1];
 
       if (wordToRhymeWith.length < 3) {
         wordToRhymeWith = lineToRhymeWith.slice(-2);
       }
 
-      rhymes = getRhymes(wordToRhymeWith, minSimilarity);
+      rhymes = getRhymes(wordToRhymeWith);
+      usedRhymeWords.push(
+        Array.isArray(wordToRhymeWith)
+          ? wordToRhymeWith.join(' ')
+          : wordToRhymeWith
+      );
     }
 
     let tries = 0;
+
     while (tries < maxTries) {
       const rhyme = getRandomFromRhymes(rhymes) || '';
 
+      if (rhyme && usedRhymeWords.includes(rhyme.rhyme)) {
+        tries++;
+        continue;
+      }
+
+      if (rhyme) {
+        usedRhymeWords.push(rhyme.rhyme);
+      }
+
       const line = getSentenceOfLength(
         nGrams,
-        rhyme,
+        rhyme ? rhyme.rhyme : '',
         25,
         30,
         reversed,
@@ -98,24 +116,13 @@ export const getVerse = (
       );
 
       if (line.length) {
-        // if (pattern !== null) {
-        //   console.log(
-        //     'rhyme:',
-        //     i,
-        //     wordToRhymeWith,
-        //     '-',
-        //     rhyme,
-        //     rhymes.length,
-        //     rhymes[0]?.similarity
-        //   );
-        // }
         verse.push({
           line,
           wordToRhymeWith: Array.isArray(wordToRhymeWith)
             ? wordToRhymeWith.join(' ')
             : wordToRhymeWith || '',
-          rhyme: rhyme || '',
-          maxScore: rhymes[0]?.similarity,
+          rhyme: rhyme || null,
+          maxScore: rhymes[0]?.score,
         });
         break;
       }
@@ -223,7 +230,7 @@ export const getHaiku = (
     line.push(word);
 
     if (syllableCount + wordSyllables > currentSyllablesCount) {
-      haiku.push({ line, wordToRhymeWith: '', rhyme: '' });
+      haiku.push({ line, wordToRhymeWith: '', rhyme: null });
 
       currentLine++;
       syllableCount = 0;
@@ -239,7 +246,7 @@ export const getHaiku = (
     syllableCount += wordSyllables;
   }
 
-  haiku.push({ line, wordToRhymeWith: '', rhyme: '' });
+  haiku.push({ line, wordToRhymeWith: '', rhyme: null });
 
   return haiku;
 };

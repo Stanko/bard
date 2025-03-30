@@ -103,6 +103,15 @@ button {
   gap: 16px;
 }
 
+@media (min-width: 700px) {
+  .bottom {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 32px;
+    justify-content: space-between;
+  }
+}
+
 main:has(.debug:checked) .rhyme {
   display: flex;
 }
@@ -138,9 +147,9 @@ main:has(.debug:checked) .rhyme {
 }
 
 .loading {
-  width: 32px;
-  height: 32px;
-  --c: no-repeat linear-gradient(#6be1e9 0 0);
+  width: 16px;
+  height: 16px;
+  --c: no-repeat linear-gradient(#727d87 0 0);
   background: var(--c), var(--c), var(--c), var(--c);
   background-size: 16px 16px;
   animation: loading 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
@@ -152,9 +161,7 @@ main:has(.debug:checked) .rhyme {
   flex-direction: column;
   gap: 32px;
   min-width: 20rem;
-
   padding: 16px;
-  margin: 0 -16px;
   background-color: rgb(255 255 255 / 0.1);
   border-radius: 8px;
 }
@@ -189,11 +196,19 @@ main:has(.debug:checked) .rhyme {
 /* Bard */
 
 .bard {
+  flex-shrink: 0;
   margin-top: 32px;
   width: 65em;
   height: 62em;
-  font-size: 3px;
+  font-size: 2px;
+  margin-bottom: 20px;
   position: relative;
+}
+
+@media (min-width: 700px) {
+  .bard {
+    font-size: 3px;
+  }
 }
 
 .bard img {

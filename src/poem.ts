@@ -71,7 +71,7 @@ export const getVerse = (
         wordToRhymeWith = lineToRhymeWith.slice(-2);
       }
 
-      rhymes = getRhymes(wordToRhymeWith, minSimilarity);
+      rhymes = getRhymes(wordToRhymeWith);
     }
 
     let tries = 0;
