@@ -108,8 +108,8 @@ export const getVerse = (
       const line = getSentenceOfLength(
         nGrams,
         rhyme ? rhyme.rhyme : '',
-        25,
-        35,
+        18,
+        32,
         reversed,
         maxTries
       );

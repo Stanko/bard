@@ -271,6 +271,12 @@ main:has(.debug:checked) .rhyme {
 }
 
 .strip {
+  background: url(/bard.png) no-repeat;
+  background-size: 100% auto;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+
   overflow: hidden;
   position: relative;
   animation-iteration-count: infinite;
@@ -286,140 +292,153 @@ main:has(.debug:checked) .rhyme {
   43.33%,
   66.67%,
   76.67%,
-  100.00% {
+  100.00%
+  {
     transform: none;
     filter: hue-rotate(0);
   }
 
-  33.34%,
-  43.32% {
+  33.43%,
+  43.23%
+  {
     transform: translateX(var(--glitch-x-1));
-    filter: hue-rotate(var(--glitch-hue-1));
+    filter: hue-rotate(var(--glitch-hue-1)) drop-shadow(2px 3px 0 rgb(0 0 255 / 0.1));
   }
 
-  66.68%,
-  76.66% {
+  66.77%,
+  76.57%
+  {
     transform: translateX(var(--glitch-x-2));
-    filter: hue-rotate(var(--glitch-hue-2));
+    filter: hue-rotate(var(--glitch-hue-2)) drop-shadow(-3px 0px 0 rgb(0 0 255 / 0.1));
   }
 }
-
 @keyframes glitch-6 {
   0.00%,
   33.33%,
   41.67%,
   66.67%,
   75.00%,
-  100.00% {
+  100.00%
+  {
     transform: none;
     filter: hue-rotate(0);
   }
 
-  33.34%,
-  41.66% {
+  33.43%,
+  41.57%
+  {
     transform: translateX(var(--glitch-x-1));
-    filter: hue-rotate(var(--glitch-hue-1));
+    filter: hue-rotate(var(--glitch-hue-1)) drop-shadow(2px -3px 0 rgb(0 0 255 / 0.1));
   }
 
-  66.68%,
-  74.99% {
+  66.77%,
+  74.90%
+  {
     transform: translateX(var(--glitch-x-2));
-    filter: hue-rotate(var(--glitch-hue-2));
+    filter: hue-rotate(var(--glitch-hue-2)) drop-shadow(3px -4px 0 rgb(255 0 0 / 0.1));
   }
 }
-
 @keyframes glitch-7 {
   0.00%,
   33.33%,
   40.48%,
   66.67%,
   73.81%,
-  100.00% {
+  100.00%
+  {
     transform: none;
     filter: hue-rotate(0);
   }
 
-  33.34%,
-  40.47% {
+  33.43%,
+  40.38%
+  {
     transform: translateX(var(--glitch-x-1));
-    filter: hue-rotate(var(--glitch-hue-1));
+    filter: hue-rotate(var(--glitch-hue-1)) drop-shadow(0px 1px 0 rgb(255 0 0 / 0.1));
   }
 
-  66.68%,
-  73.80% {
+  66.77%,
+  73.71%
+  {
     transform: translateX(var(--glitch-x-2));
-    filter: hue-rotate(var(--glitch-hue-2));
+    filter: hue-rotate(var(--glitch-hue-2)) drop-shadow(1px 0px 0 rgb(255 0 0 / 0.1));
   }
 }
-
 @keyframes glitch-8 {
   0.00%,
   33.33%,
   39.58%,
   66.67%,
   72.92%,
-  100.00% {
+  100.00%
+  {
     transform: none;
     filter: hue-rotate(0);
   }
 
-  33.34%,
-  39.57% {
+  33.43%,
+  39.48%
+  {
     transform: translateX(var(--glitch-x-1));
-    filter: hue-rotate(var(--glitch-hue-1));
+    filter: hue-rotate(var(--glitch-hue-1)) drop-shadow(2px -3px 0 rgb(0 0 255 / 0.1));
   }
 
-  66.68%,
-  72.91% {
+  66.77%,
+  72.82%
+  {
     transform: translateX(var(--glitch-x-2));
-    filter: hue-rotate(var(--glitch-hue-2));
+    filter: hue-rotate(var(--glitch-hue-2)) drop-shadow(-2px -2px 0 rgb(255 0 0 / 0.1));
   }
 }
-
 @keyframes glitch-9 {
   0.00%,
   33.33%,
   38.89%,
   66.67%,
   72.22%,
-  100.00% {
+  100.00%
+  {
     transform: none;
     filter: hue-rotate(0);
   }
 
-  33.34%,
-  38.88% {
+  33.43%,
+  38.79%
+  {
     transform: translateX(var(--glitch-x-1));
-    filter: hue-rotate(var(--glitch-hue-1));
+    filter: hue-rotate(var(--glitch-hue-1)) drop-shadow(1px 1px 0 rgb(255 0 0 / 0.1));
   }
 
-  66.68%,
-  72.21% {
+  66.77%,
+  72.12%
+  {
     transform: translateX(var(--glitch-x-2));
-    filter: hue-rotate(var(--glitch-hue-2));
+    filter: hue-rotate(var(--glitch-hue-2)) drop-shadow(0px 2px 0 rgb(255 0 0 / 0.1));
   }
 }
-
 @keyframes glitch-10 {
   0.00%,
   33.33%,
   38.33%,
   66.67%,
   71.67%,
-  100.00% {
+  100.00%
+  {
     transform: none;
     filter: hue-rotate(0);
   }
 
-  33.34%,
-  38.32% {
+  33.43%,
+  38.23%
+  {
     transform: translateX(var(--glitch-x-1));
-    filter: hue-rotate(var(--glitch-hue-1));
+    filter: hue-rotate(var(--glitch-hue-1)) drop-shadow(-3px 1px 0 rgb(0 0 255 / 0.1));
   }
 
-  66.68%,
-  71.66% {
+  66.77%,
+  71.57%
+  {
     transform: translateX(var(--glitch-x-2));
-    filter: hue-rotate(var(--glitch-hue-2));
+    filter: hue-rotate(var(--glitch-hue-2)) drop-shadow(3px 1px 0 rgb(255 0 0 / 0.1));
   }
 }

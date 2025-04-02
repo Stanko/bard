@@ -148,6 +148,7 @@ const generate = async () => {
     $verses.replaceChildren($verse);
 
     if ($autoplay.checked) {
+      stop = false;
       readVerse(verses);
     }
 
@@ -206,6 +207,7 @@ const generate = async () => {
   verseIndex = 0;
 
   if ($autoplay.checked) {
+    stop = false;
     readVerse(verses);
   }
 
