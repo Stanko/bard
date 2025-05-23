@@ -87,7 +87,7 @@ const loadCartridge = () => {
     lotr: 'green',
     shakespeare: 'blue',
     hp: 'red',
-    haiku: 'yellow',
+    fz: 'yellow',
   };
   const dataset = getSelectedDataset() as keyof typeof map;
   const color = map[dataset];

@@ -190,8 +190,17 @@ const filePathsShakespeare = ['./text/shakespeare.txt'];
 
 const filePathsHaikus = ['./text/haikus.txt'];
 
+// main({
+//   filePaths: filePathsHaikus,
+//   nGramsLengths: [2, 3, 4],
+//   reversed: true,
+//   parseFromDisk: true,
+// });
+
+const filePathsFZ = ['./text/zappa.txt'];
+
 main({
-  filePaths: filePathsHaikus,
+  filePaths: filePathsFZ,
   nGramsLengths: [2, 3, 4],
   reversed: true,
   parseFromDisk: true,

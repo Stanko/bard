@@ -40,7 +40,7 @@ export const apostrophed: { [key: string]: string } = {
   MARYS: "MARY'S",
   MENS: "MEN'S",
   MUSTNT: "MUSTN'T",
-  Oclock: "O'CLOCK",
+  N: "N'",
   OCLOCK: "O'CLOCK",
   SHANT: "SHAN'T",
   SHECOULD: "SHE'D",

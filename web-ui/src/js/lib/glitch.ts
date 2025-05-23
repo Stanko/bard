@@ -31,7 +31,7 @@ const getKeyFrames = (
     keys: baseKeys,
     css: {
       transform: 'none',
-      filter: 'hue-rotate(0)', // Hack to force animation in Safari
+      filter: 'hue-rotate(0) drop-shadow(0 0 0 transparent)', // Hack to force animation in Safari
     },
   });
 
@@ -39,7 +39,8 @@ const getKeyFrames = (
     const p = i * percentageStep;
 
     // Blue / red shadow
-    const color = Math.random() > 0.5 ? 'rgb(255 0 0 / 0.1)' : 'rgb(0 0 255 / 0.1)';
+    const color =
+      Math.random() > 0.5 ? 'rgb(255 0 0 / 0.1)' : 'rgb(0 0 255 / 0.1)';
     const shadowX = random(-4, 4);
     const shadowY = random(-4, 4);
 
@@ -69,15 +70,11 @@ const getKeyFrames = (
   return `@keyframes ${name} {\n  ${css}\n}`;
 };
 
-const getStripHTML = (
-  top: number,
-  stripHeight: number
-): string => {
+const getStripHTML = (top: number, stripHeight: number): string => {
   const duration = random(5, 10);
   const name = `glitch-${duration}`;
 
-  return (
-`<div 
+  return `<div 
   class="strip" 
   style="
     --glitch-x-1: ${random(-10, 10)}em;
@@ -90,7 +87,7 @@ const getStripHTML = (
     animation-name: ${name};
     animation-duration: ${duration * 1000}ms; 
     animation-delay: ${random(0, 2)}s;
-  "></div>`);
+  "></div>`;
 };
 
 const getGlitchHTML = (height: number): string[] => {
