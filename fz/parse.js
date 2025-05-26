@@ -55,9 +55,9 @@ export async function processTxtFiles(folderPath) {
                   const line = l
                     .replace(/<br>/g, '')
                     .replace(/<[^>]*>?/gm, '')
-                    .replace(/(\[|:\])/gm, '')
+                    .replace(/\[(.*?):\]/gm, '')
                     .replace(/&amp;/g, 'and');
-                  lines.push(line);
+                  lines.push(line.trim());
                   return line;
                 })
             : null,

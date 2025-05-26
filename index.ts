@@ -97,7 +97,7 @@ const main = async ({
       const nGram = generateNGrams(sentences, n);
 
       console.timeEnd(`generating ${n} ngrams`);
-      const nGramsJson = JSON.stringify(nGram);
+      const nGramsJson = JSON.stringify(nGram, null, 2);
 
       console.log(`total ${n} ngrams: ${Object.keys(nGram.map).length}`);
 
@@ -161,34 +161,29 @@ const filePathsLOTR = [
 
 const filePathsShakespeare = ['./text/shakespeare.txt'];
 
+const filePathsHaikus = ['./text/haikus.txt'];
+const filePathsFZ = ['./text/zappa.txt'];
+
 // main({
 //   filePaths: filePathsShakespeare,
-//   // filePaths: filePathsHP,
-//   // filePaths: filePathsLOTR,
 //   nGramsLengths: [2, 3, 4],
 //   reversed: true,
 //   parseFromDisk: true,
 // });
 
 // main({
-//   // filePaths: filePathsShakespeare,
 //   filePaths: filePathsHP,
-//   // filePaths: filePathsLOTR,
 //   nGramsLengths: [2, 3, 4],
 //   reversed: true,
 //   parseFromDisk: true,
 // });
 
 // main({
-//   // filePaths: filePathsShakespeare,
-//   // filePaths: filePathsHP,
 //   filePaths: filePathsLOTR,
 //   nGramsLengths: [2, 3, 4],
 //   reversed: true,
 //   parseFromDisk: true,
 // });
-
-const filePathsHaikus = ['./text/haikus.txt'];
 
 // main({
 //   filePaths: filePathsHaikus,
@@ -196,8 +191,6 @@ const filePathsHaikus = ['./text/haikus.txt'];
 //   reversed: true,
 //   parseFromDisk: true,
 // });
-
-const filePathsFZ = ['./text/zappa.txt'];
 
 main({
   filePaths: filePathsFZ,
