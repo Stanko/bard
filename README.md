@@ -1,6 +1,6 @@
-# B.A.R.D.
+# BARD
 
-Glitchy B.A.R.D. is an experiment in robot poetry for [Creative Coding Amsterdam](https://cca.codes) poetry afternoon.
+Glitchy BARD is an experiment in robot poetry for [Creative Coding Amsterdam](https://cca.codes) poetry afternoon.
 
 Code is a rough state at the moment. I was experimenting a lot so everything is scattered around. If I ever clean it up, I'll write a proper README.
 
