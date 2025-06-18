@@ -67,7 +67,6 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
   // }, [currentKey]);
 
   useEffect(() => {
-    console.log('currentKey changed');
     setShowNudge(true);
   }, [currentKey]);
 

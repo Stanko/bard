@@ -65,14 +65,18 @@ export const speak = (
   return new Promise((resolve) => {
     // Wait for voices to be loaded
     if (speechSynthesis.getVoices().length === 0) {
-      speechSynthesis.addEventListener('voiceschanged', () => {
-        instance = textToSpeech(text, voice);
-        instance.addEventListener('end', callback);
-        resolve(() => {
-          instance.removeEventListener('end', callback);
-          // speechSynthesis.cancel();
-        });
-      });
+      speechSynthesis.addEventListener(
+        'voiceschanged',
+        () => {
+          instance = textToSpeech(text, voice);
+          instance.addEventListener('end', callback);
+          resolve(() => {
+            instance.removeEventListener('end', callback);
+            // speechSynthesis.cancel();
+          });
+        },
+        { once: true }
+      );
     } else {
       instance = textToSpeech(text, voice);
       instance.addEventListener('end', callback);

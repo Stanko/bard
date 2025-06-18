@@ -12,10 +12,33 @@ type SpeechControlsProps = React.HTMLAttributes<HTMLDivElement> & {
   verses: Verse[];
 };
 
-const checkIfVoiceExists = (voice: string): boolean => {
-  const voices = window.speechSynthesis.getVoices();
-  return voices.some((v) => v.name === voice);
+const checkIfVoiceExists = async (voice: string): Promise<boolean> => {
+  return new Promise((resolve) => {
+    // Wait for voices to be loaded
+    if (speechSynthesis.getVoices().length === 0) {
+      speechSynthesis.addEventListener(
+        'voiceschanged',
+        () => {
+          const voices = window.speechSynthesis.getVoices();
+          resolve(
+            voices.some((v) => v.name.toLowerCase() === voice.toLowerCase())
+          );
+        },
+        { once: true }
+      );
+    } else {
+      const voices = window.speechSynthesis.getVoices();
+      resolve(voices.some((v) => v.name.toLowerCase() === voice.toLowerCase()));
+    }
+  });
 };
+
+let noOrganVoice = false;
+
+checkIfVoiceExists('Organ').then((exists) => {
+  console.log('Organ voice exists:', exists);
+  noOrganVoice = !exists;
+});
 
 const SpeechControls = ({
   className = '',
@@ -38,8 +61,6 @@ const SpeechControls = ({
       play();
     }
   }, [verses]);
-
-  const noOrganVoice = !checkIfVoiceExists('Organ');
 
   useEffect(() => {
     if (activeVerse >= 0 && activeVerse < verses.length) {
