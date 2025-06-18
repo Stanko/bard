@@ -1,0 +1,109 @@
+html:has(.dialog[open]) {
+  overflow: hidden;
+  touch-action: none;
+  overflow-y: scroll;
+  /* scrollbar-gutter: auto; */
+  /* margin-right: 15px; */
+}
+
+.dialog {
+  padding: 4rem 0 0 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border: none;
+  background: none;
+  overflow: auto;
+  transition: display 500ms allow-discrete, overlay 500ms allow-discrete;
+  touch-action: auto;
+  /* Needed for Safari */
+  position: fixed;
+  inset: 0;
+  scrollbar-color: var(--gray-4) var(--gray-1);
+
+  overscroll-behavior: none;
+}
+
+.dialog[open] {
+  opacity: 1;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+@media (min-width: 800px) {
+  .dialog {
+    padding: 6rem 2rem;
+  }
+}
+
+.dialog::backdrop {
+  display: none;
+}
+
+.dialog__backdrop {
+  background-color: rgb(0 0 0 / 0.6);
+  transition: opacity 500ms;
+  opacity: 0;
+  will-change: opacity;
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+}
+
+.dialog[open] .dialog__backdrop {
+  opacity: 1;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+.dialog__content {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: rgb(232 232 255 / 0.7);
+  backdrop-filter: blur(5px);
+  transition: display 300ms allow-discrete, overlay 300ms allow-discrete,
+    transform 300ms, opacity 300ms;
+  scrollbar-width: auto;
+  transition-delay: 100ms;
+  padding: 1.5rem;
+
+  /* Collapsed styles */
+  opacity: 0;
+  display: none;
+  transform: translateY(6rem);
+  will-change: transform;
+}
+
+@media (min-width: 800px) {
+  .dialog__content {
+    max-width: 45rem;
+  }
+}
+
+.dialog[open] .dialog__content {
+  display: block;
+  transform: none;
+  opacity: 1;
+
+  @starting-style {
+    transform: translateY(6rem);
+    opacity: 0;
+  }
+}
+
+.dialog__close-form {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: block;
+  outline: 1px solid blue;
+}

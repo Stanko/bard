@@ -1,0 +1,30 @@
+.toggle-font .toggle__label {
+  color: var(--gray-5);
+}
+
+.toggle-font:hover .toggle__label {
+  color: var(--gray-8);
+}
+
+.toggle-font .toggle__bg-wrapper {
+  display: none;
+}
+
+.mono-font {
+  font-size: 68.75%;
+}
+
+@media (min-width: 600px) {
+  .mono-font {
+    font-size: 87.5%;
+  }
+}
+
+.mono-font body {
+  font-family: var(--mono-font);
+  font-weight: 600;
+}
+
+.mono-font {
+  --content-max-width: 80rem;
+}

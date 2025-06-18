@@ -1,0 +1,33 @@
+.controls {
+  --border-color: var(--gray-5);
+  max-width: 28rem;
+  padding: calc(4 * var(--px));
+  background-color: var(--gray-2);
+  align-self: flex-start;
+}
+
+.controls__toggles {
+  display: flex;
+  gap: 1rem;
+}
+
+.controls__seed {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.controls__seed-input {
+  max-width: calc(100% - 4rem);
+  overflow: hidden;
+}
+
+.controls__seed-button {
+  margin-top: 1rem;
+  flex-shrink: 0;
+}
+
+.controls__datasets {
+  display: flex;
+  gap: 1rem;
+}

@@ -1,0 +1,264 @@
+@font-face {
+  font-family: 'tiny5';
+  src: url('/tiny5/Tiny5-Regular.ttf') format('truetype'),
+    url('/tiny5/Tiny5-Regular.woff2') format('woff2'),
+    url('/tiny5/Tiny5-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --px-font: 'tiny5', sans-serif;
+  --mono-font: Menlo, 'DejaVu Sans Mono', ui-monospace, 'Fira Code',
+    'Cascadia Code', 'Source Code Pro', Consolas, monospace;
+
+  --px: 0.25rem;
+  --minus-px: -0.25rem;
+  --white: #ffffff;
+  --active-white: rgb(255, 255, 255, 0.9);
+  --bg-color: #d5d8e3;
+  --black: #000000;
+
+  --gray-1: oklch(95% 0.01 250);
+  --gray-2: oklch(85% 0.01 250);
+  --gray-3: oklch(75% 0.01 250);
+  --gray-4: oklch(65% 0.01 250);
+  --gray-5: oklch(55% 0.01 250);
+  --gray-6: oklch(45% 0.01 250);
+  --gray-7: oklch(35% 0.01 250);
+  --gray-8: oklch(25% 0.01 250);
+
+  --content-max-width: 70rem;
+
+  font-optical-sizing: auto;
+  font-family: var(--px-font);
+  line-height: 1.3;
+  font-weight: 400;
+
+  background-color: var(--bg-color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  scrollbar-color: var(--gray-4) transparent;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 75%;
+  scrollbar-gutter: stable;
+
+  background-image: url(/bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  /* filter: saturate(0.01) brightness(2) contrast(0.1); */
+}
+
+body {
+  filter: none;
+}
+
+@media (min-width: 600px) {
+  html {
+    font-size: 100%;
+  }
+}
+
+body {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 800px) {
+  body {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  body {
+    padding: 3rem;
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+pre,
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  border-radius: 0;
+  border: none;
+  appearance: none;
+  background-color: transparent;
+  color: inherit;
+}
+
+pre,
+code {
+  font-family: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+pre {
+  max-width: 100%;
+  overflow: auto;
+  scrollbar-color: var(--gray-4) transparent;
+  scrollbar-width: thin;
+}
+
+dialog {
+  color: inherit;
+  font: inherit;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+h1 {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+a,
+a:visited,
+.text-link {
+  color: var(--dark);
+  text-decoration-color: var(--gray-3);
+  text-decoration-line: underline;
+}
+
+a:focus,
+a:hover,
+.text-link:focus,
+.text-link:hover {
+  outline: none;
+  color: var(--outline);
+  text-decoration-color: var(--currentColor);
+}
+
+a:focus-visible,
+.text-link:focus-visible {
+  outline: var(--px) solid currentColor;
+  outline-offset: 2px;
+}
+
+b {
+  text-decoration: underline;
+}
+
+.dragging {
+  user-select: none;
+}
+
+/* ----- THEMES ----- */
+
+:root,
+.blue {
+  --outline: rgb(63, 63, 113);
+  --light: rgb(150, 186, 242);
+  --mid: rgb(112, 154, 248);
+  --dark: rgb(94, 109, 218);
+}
+
+.red {
+  --outline: rgb(113, 30, 30);
+  --light: rgb(242, 140, 140);
+  --mid: rgb(248, 100, 100);
+  --dark: rgb(218, 70, 70);
+}
+
+.green {
+  --outline: rgb(35, 72, 31);
+  --light: rgb(165, 222, 153);
+  --mid: rgb(98, 184, 92);
+  --dark: rgb(58, 121, 52);
+}
+
+.yellow {
+  --outline: rgb(88, 56, 7);
+  --light: rgb(240, 240, 107);
+  --mid: rgb(234, 220, 60);
+  --dark: rgb(185, 165, 38);
+}
+
+.muted,
+*:disabled,
+.disabled {
+  /* --outline: rgb(130, 130, 130);
+  --light: rgb(240, 240, 240);
+  --mid: rgb(210, 210, 210);
+  --dark: rgb(180, 180, 180); */
+  --outline: var(--gray-4);
+  --light: var(--gray-1);
+  --mid: var(--gray-2);
+  --dark: var(--gray-3);
+}
+
+:root,
+.blue,
+.red,
+.green,
+.muted,
+.yellow {
+  color: var(--outline);
+}
+
+/* ----- HELPERS ----- */
+
+.hidden {
+  position: absolute;
+  left: -200vw;
+  opacity: 0;
+  pointer-events: 0;
+}
+
+.px-border {
+  box-shadow: var(--px) 0 0 0 var(--border-color, var(--gray-4)),
+    0 var(--px) 0 0 var(--border-color, var(--gray-4)),
+    var(--minus-px) 0 0 0 var(--border-color, var(--gray-4)),
+    0 var(--minus-px) 0 0 var(--border-color, var(--gray-4));
+}
+
+/* ----- ANIMATIONS ----- */
+
+@keyframes fly-in {
+  from {
+    transform: translateY(-2rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

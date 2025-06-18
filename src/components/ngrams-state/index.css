@@ -1,0 +1,27 @@
+.ngrams-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.ngrams-state__progress {
+  height: calc(6 * var(--px));
+  border: var(--px) solid var(--outline);
+  padding: var(--px);
+  position: relative;
+  background-color: var(--gray-1);
+}
+
+.ngrams-state__bar {
+  height: 100%;
+  width: 0;
+  background-color: var(--mid);
+}
+
+.ngrams-state__error {
+  position: absolute;
+  inset: 0;
+  text-align: center;
+  line-height: calc(4 * var(--px));
+}

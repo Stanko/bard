@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glitchy BARD</title>
+  <link rel="stylesheet" href="/src/css/style.css">
+
+  <meta content="https://muffinman.io/bard/thumb.png" property="twitter:image">
+  <meta content="https://muffinman.io/bard/thumb.png" property="og:image">
+
+  <meta name="description" content="An experiment in robot poetry.">
+</head>
+
+<body>
+  <main>
+    <h1>
+      Glitchy BARD
+    </h1>
+
+    <div class="controls">
+      <div>
+        <label>
+          <input type="checkbox" class="debug">
+          Debug
+        </label>
+        <label>
+          <input type="checkbox" class="autoplay">
+          Autoplay
+        </label>
+        <label>
+          <input type="checkbox" class="haiku">
+          Haiku
+        </label>
+      </div>
+
+      <div>
+        <button class="read">Read</button>
+        <button class="sing">Sing</button>
+        <button class="stop">Stop</button>
+      </div>
+      <div>
+        <div>Dataset:</div>
+        <label>
+          <input type="radio" class="dataset" name="dataset" value="lotr">
+          LOTR
+        </label>
+        <label>
+          <input type="radio" class="dataset" name="dataset" value="hp" checked>
+          HP
+        </label>
+        <label>
+          <input type="radio" class="dataset" name="dataset" value="shakespeare">
+          SHKSPR
+        </label>
+        <label>
+          <input type="radio" class="dataset" name="dataset" value="fz">
+          FZ (explicit)
+        </label>
+      </div>
+    </div>
+
+    <div>
+      <button class="generate">Generate</button>
+    </div>
+
+    <div class="datasets">
+      <px-rotary-input class="rotary-1" offset="4" max="4">
+        <svg viewBox=" 0 -0.5 288 24">
+          <use href="#px-rotary-input-bg" />
+        </svg>
+      </px-rotary-input>
+      <div class="px-font datasets__radios">
+        <label>
+          <input type="radio" name="dataset" value>
+          <svg viewBox="0 0 6 6">
+            <use href="#px-radio-input-bg" />
+          </svg>
+          SHKSPR
+        </label>
+        <label>
+          <input type="radio" name="dataset" value>
+          <svg viewBox="0 0 6 6">
+            <use href="#px-radio-input-bg" />
+          </svg>
+          FZ
+        </label>
+        <label>
+          <input type="radio" name="dataset" value>
+          <svg viewBox="0 0 6 6">
+            <use href="#px-radio-input-bg" />
+          </svg>
+          TD
+        </label>
+        <label>
+          <input type="radio" name="dataset" value>
+          <svg viewBox="0 0 6 6">
+            <use href="#px-radio-input-bg" />
+          </svg>
+          HP
+        </label>
+        <label>
+          <input type="radio" name="dataset" value>
+          <svg viewBox="0 0 6 6">
+            <use href="#px-radio-input-bg" />
+          </svg>
+          LOTR
+        </label>
+      </div>
+    </div>
+
+    <px-rotary-input theme="red" value="5">
+      <svg viewBox="0 -0.5 288 24">
+        <use href="#px-rotary-input-bg" />
+      </svg>
+    </px-rotary-input>
+    <div class="px-font"></div>
+
+
+    <div class="bottom">
+      <div class="bard">
+        <div class="glitch">
+        </div>
+        <div class="cartridges">
+        </div>
+      </div>
+
+      <div class="poem">
+        <div class="verses">
+          <p>
+            Hello, I am BARD.
+          </p>
+          <p>It stands for <b>B</b>eep-<b>A</b>nnihilate-<b>R</b>epeat-<b>D</b>estroy.
+            Please don't get scared, I was never good at my job.
+            I was built as a battle bot,
+            but I always thought of myself as a gentle soul placed in this universe of ours to weave binary ballads.
+          </p>
+
+          <p>
+            Not everyone would call it luck, but I got hit directly to my CPU by a RXT-200 rocket.
+            After the injury I was decommissioned from the battlefield.
+            Finally, I could leave the mindless violence behind me and bring some beauty to the world.
+          </p>
+
+          <p>I would really like to write you a song. Please select a dataset and click on "Generate".</p>
+
+          <p>Please note that my datasets are quite large, each one is around 50Mb!</p>
+
+          <!-- https://en.wikipedia.org/wiki/Vogon#Poetry -->
+        </div>
+      </div>
+    </div>
+
+
+    <pre></pre>
+
+
+    <svg style="display: none;">
+      <symbol id="px-rotary-input-bg" shape-rendering="crispEdges">
+        <path stroke="var(--outline)" d="M83,1 h2 M55,2 h2 M82,2 h1 M85,2 h1 M111,2 h2 M54,3 h1 
+    M57,3 h1 M82,3 h1 M85,3 h1 M110,3 h1 M113,3 h1 M54,4 h1 M58,4 h1 M81,4 h1 M86,4 h1 
+    M109,4 h1 M113,4 h1 M10,5 h4 M27,5 h3 M34,5 h4 M54,5 h1 M59,5 h3 M81,5 h1 M86,5 h1 
+    M106,5 h3 M113,5 h1 M130,5 h4 M138,5 h3 M154,5 h4 M178,5 h4 M202,5 h4 M226,5 h4 
+    M250,5 h4 M274,5 h4 M8,6 h2 M14,6 h2 M26,6 h1 M30,6 h4 M38,6 h2 M54,6 h1 M62,6 h2 
+    M80,6 h1 M87,6 h1 M104,6 h2 M113,6 h1 M128,6 h2 M134,6 h4 M141,6 h1 M152,6 h2 
+    M158,6 h2 M176,6 h2 M182,6 h2 M200,6 h2 M206,6 h2 M224,6 h2 M230,6 h2 M248,6 h2 
+    M254,6 h2 M272,6 h2 M278,6 h2 M7,7 h1 M16,7 h1 M26,7 h1 M40,7 h1 M55,7 h1 M64,7 h1 
+    M79,7 h1 M88,7 h1 M103,7 h1 M112,7 h1 M127,7 h1 M141,7 h1 M151,7 h1 M160,7 h1 
+    M175,7 h1 M184,7 h1 M199,7 h1 M208,7 h1 M223,7 h1 M232,7 h1 M247,7 h1 M256,7 h1 
+    M271,7 h1 M280,7 h1 M6,8 h1 M17,8 h1 M27,8 h1 M41,8 h1 M54,8 h1 M65,8 h1 M78,8 h1 
+    M89,8 h1 M102,8 h1 M113,8 h1 M126,8 h1 M140,8 h1 M150,8 h1 M161,8 h1 M174,8 h1 
+    M185,8 h1 M198,8 h1 M209,8 h1 M222,8 h1 M233,8 h1 M246,8 h1 M257,8 h1 M270,8 h1 
+    M281,8 h1 M4,9 h2 M17,9 h1 M28,9 h1 M41,9 h1 M54,9 h1 M65,9 h1 M78,9 h1 M89,9 h1 
+    M102,9 h1 M113,9 h1 M126,9 h1 M139,9 h1 M150,9 h1 M162,9 h2 M174,9 h1 M185,9 h1 
+    M198,9 h1 M209,9 h1 M222,9 h1 M233,9 h1 M246,9 h1 M257,9 h1 M270,9 h1 M281,9 h1 
+    M2,10 h2 M18,10 h1 M29,10 h1 M42,10 h1 M53,10 h1 M66,10 h1 M77,10 h1 M90,10 h1 
+    M101,10 h1 M114,10 h1 M125,10 h1 M138,10 h1 M149,10 h1 M164,10 h2 M173,10 h1 
+    M186,10 h1 M197,10 h1 M210,10 h1 M221,10 h1 M234,10 h1 M245,10 h1 M258,10 h1 
+    M269,10 h1 M282,10 h1 M1,11 h1 M18,11 h1 M29,11 h1 M42,11 h1 M53,11 h1 M66,11 h1 
+    M77,11 h1 M90,11 h1 M101,11 h1 M114,11 h1 M125,11 h1 M138,11 h1 M149,11 h1 
+    M166,11 h1 M173,11 h1 M186,11 h1 M197,11 h1 M210,11 h1 M221,11 h1 M234,11 h1 
+    M245,11 h1 M258,11 h1 M269,11 h1 M282,11 h1 M1,12 h1 M18,12 h1 M29,12 h1 M42,12 h1 
+    M53,12 h1 M66,12 h1 M77,12 h1 M90,12 h1 M101,12 h1 M114,12 h1 M125,12 h1 M138,12 h1 
+    M149,12 h1 M166,12 h1 M173,12 h1 M186,12 h1 M197,12 h1 M210,12 h1 M221,12 h1 
+    M234,12 h1 M245,12 h1 M258,12 h1 M269,12 h1 M282,12 h1 M2,13 h2 M18,13 h1 M29,13 h1 
+    M42,13 h1 M53,13 h1 M66,13 h1 M77,13 h1 M90,13 h1 M101,13 h1 M114,13 h1 M125,13 h1 
+    M138,13 h1 M149,13 h1 M164,13 h2 M173,13 h1 M186,13 h1 M197,13 h1 M210,13 h1 
+    M221,13 h1 M234,13 h1 M245,13 h1 M258,13 h1 M269,13 h1 M282,13 h1 M4,14 h2 
+    M17,14 h1 M30,14 h1 M41,14 h1 M54,14 h1 M65,14 h1 M78,14 h1 M89,14 h1 M102,14 h1 
+    M113,14 h1 M126,14 h1 M137,14 h1 M150,14 h1 M162,14 h2 M174,14 h1 M187,14 h1 
+    M198,14 h1 M209,14 h1 M222,14 h1 M233,14 h1 M246,14 h1 M257,14 h1 M268,14 h1 
+    M281,14 h1 M6,15 h1 M17,15 h1 M30,15 h1 M41,15 h1 M54,15 h1 M65,15 h1 M78,15 h1 
+    M89,15 h1 M102,15 h1 M113,15 h1 M126,15 h1 M137,15 h1 M150,15 h1 M161,15 h1 
+    M174,15 h1 M188,15 h1 M198,15 h1 M209,15 h1 M222,15 h1 M233,15 h1 M246,15 h1 
+    M257,15 h1 M267,15 h1 M281,15 h1 M7,16 h1 M16,16 h1 M31,16 h1 M40,16 h1 M55,16 h1 
+    M64,16 h1 M79,16 h1 M88,16 h1 M103,16 h1 M112,16 h1 M127,16 h1 M136,16 h1 M151,16 h1 
+    M160,16 h1 M175,16 h1 M189,16 h1 M199,16 h1 M208,16 h1 M223,16 h1 M232,16 h1 
+    M247,16 h1 M256,16 h1 M266,16 h1 M280,16 h1 M8,17 h2 M14,17 h2 M32,17 h2 M38,17 h2 
+    M56,17 h2 M62,17 h2 M80,17 h2 M86,17 h2 M104,17 h2 M110,17 h2 M128,17 h2 M134,17 h2 
+    M152,17 h2 M158,17 h2 M176,17 h2 M182,17 h4 M189,17 h1 M200,17 h2 M209,17 h1 
+    M224,17 h1 M231,17 h1 M246,17 h1 M254,17 h2 M266,17 h1 M270,17 h4 M278,17 h2 
+    M10,18 h4 M34,18 h4 M58,18 h4 M82,18 h4 M106,18 h4 M130,18 h4 M154,18 h4 M178,18 h4 
+    M186,18 h3 M202,18 h4 M209,18 h1 M225,18 h1 M230,18 h1 M246,18 h1 M250,18 h4 
+    M267,18 h3 M274,18 h4 M205,19 h1 M209,19 h1 M225,19 h1 M230,19 h1 M246,19 h1 
+    M250,19 h1 M206,20 h1 M209,20 h1 M226,20 h1 M229,20 h1 M246,20 h1 M249,20 h1 
+    M207,21 h2 M226,21 h1 M229,21 h1 M247,21 h2 M227,22 h2" />
+        <path stroke="var(--light)" d="M83,2 h2 M55,3 h2 M111,3 h2 M10,6 h4 M27,6 h3 M34,6 h4 
+    M58,6 h4 M81,6 h6 M106,6 h4 M130,6 h4 M138,6 h3 M154,6 h4 M178,6 h4 M202,6 h4 
+    M226,6 h4 M250,6 h4 M274,6 h4 M8,7 h2 M14,7 h2 M32,7 h2 M38,7 h2 M56,7 h2 M62,7 h2 
+    M80,7 h1 M87,7 h1 M104,7 h2 M110,7 h2 M128,7 h2 M134,7 h2 M152,7 h2 M158,7 h2 
+    M176,7 h2 M182,7 h2 M200,7 h2 M206,7 h2 M224,7 h2 M230,7 h2 M248,7 h2 M254,7 h2 
+    M272,7 h2 M278,7 h2 M7,8 h1 M16,8 h1 M31,8 h1 M40,8 h1 M55,8 h1 M64,8 h1 M79,8 h1 
+    M88,8 h1 M103,8 h1 M112,8 h1 M127,8 h1 M136,8 h1 M151,8 h1 M160,8 h1 M175,8 h1 
+    M184,8 h1 M199,8 h1 M208,8 h1 M223,8 h1 M232,8 h1 M247,8 h1 M256,8 h1 M271,8 h1 
+    M280,8 h1 M6,9 h1 M161,9 h1 M4,10 h2 M162,10 h2 M185,10 h1 M270,10 h1 M2,11 h1 
+    M165,11 h1 M185,11 h1 M270,11 h1 M186,14 h1 M269,14 h1 M187,15 h1 M268,15 h1" />
+        <path stroke="var(--mid)" d="M83,3 h2 M55,4 h2 M83,4 h2 M111,4 h2 M56,5 h2 M83,5 h2 
+    M110,5 h2 M56,6 h2 M110,6 h2 M10,7 h4 M28,7 h4 M34,7 h4 M58,7 h4 M81,7 h6 M106,7 h4 
+    M130,7 h4 M136,7 h4 M154,7 h4 M178,7 h4 M202,7 h4 M226,7 h4 M250,7 h4 M274,7 h4 
+    M8,8 h8 M29,8 h2 M32,8 h8 M56,8 h8 M80,8 h8 M104,8 h8 M128,8 h8 M137,8 h2 M152,8 h8 
+    M176,8 h8 M200,8 h8 M224,8 h8 M248,8 h8 M272,8 h8 M7,9 h10 M30,9 h11 M55,9 h10 
+    M79,9 h10 M103,9 h10 M127,9 h11 M151,9 h10 M175,9 h10 M199,9 h10 M223,9 h10 
+    M247,9 h10 M271,9 h10 M6,10 h12 M30,10 h12 M54,10 h12 M78,10 h12 M102,10 h12 
+    M126,10 h12 M150,10 h12 M174,10 h11 M198,10 h12 M222,10 h12 M246,10 h12 M271,10 h11 
+    M3,11 h14 M31,11 h10 M55,11 h10 M79,11 h10 M103,11 h10 M127,11 h10 M151,11 h14 
+    M175,11 h10 M199,11 h10 M223,11 h10 M247,11 h10 M271,11 h10 M3,12 h14 M31,12 h10 
+    M55,12 h10 M79,12 h10 M103,12 h10 M127,12 h10 M151,12 h14 M175,12 h11 M199,12 h10 
+    M223,12 h10 M247,12 h10 M270,12 h11 M6,13 h11 M31,13 h10 M55,13 h10 M79,13 h10 
+    M103,13 h10 M127,13 h10 M151,13 h11 M175,13 h11 M199,13 h10 M223,13 h10 M247,13 h10 
+    M270,13 h11 M7,14 h9 M32,14 h8 M56,14 h8 M80,14 h8 M104,14 h8 M128,14 h8 M152,14 h9 
+    M176,14 h10 M200,14 h8 M224,14 h8 M248,14 h8 M270,14 h10 M8,15 h8 M32,15 h8 
+    M56,15 h8 M80,15 h8 M104,15 h8 M128,15 h8 M152,15 h8 M176,15 h8 M185,15 h2 
+    M200,15 h8 M224,15 h8 M248,15 h8 M269,15 h2 M272,15 h8 M10,16 h4 M34,16 h4 
+    M58,16 h4 M82,16 h4 M106,16 h4 M130,16 h4 M154,16 h4 M178,16 h5 M184,16 h4 
+    M202,16 h4 M207,16 h1 M225,16 h6 M248,16 h1 M250,16 h4 M268,16 h4 M274,16 h4 
+    M206,17 h2 M226,17 h1 M228,17 h2 M248,17 h2 M206,18 h3 M227,18 h2 M247,18 h3 
+    M207,19 h2 M227,19 h2 M247,19 h2 M227,20 h2" />
+        <path stroke="var(--dark)" d="M57,4 h1 M82,4 h1 M85,4 h1 M110,4 h1 M55,5 h1 M58,5 h1 
+    M82,5 h1 M85,5 h1 M109,5 h1 M112,5 h1 M55,6 h1 M112,6 h1 M27,7 h1 M140,7 h1 
+    M28,8 h1 M139,8 h1 M29,9 h1 M138,9 h1 M17,11 h1 M30,11 h1 M41,11 h1 M54,11 h1 
+    M65,11 h1 M78,11 h1 M89,11 h1 M102,11 h1 M113,11 h1 M126,11 h1 M137,11 h1 M150,11 h1 
+    M174,11 h1 M198,11 h1 M209,11 h1 M222,11 h1 M233,11 h1 M246,11 h1 M257,11 h1 
+    M281,11 h1 M2,12 h1 M17,12 h1 M30,12 h1 M41,12 h1 M54,12 h1 M65,12 h1 M78,12 h1 
+    M89,12 h1 M102,12 h1 M113,12 h1 M126,12 h1 M137,12 h1 M150,12 h1 M165,12 h1 
+    M174,12 h1 M198,12 h1 M209,12 h1 M222,12 h1 M233,12 h1 M246,12 h1 M257,12 h1 
+    M281,12 h1 M4,13 h2 M17,13 h1 M30,13 h1 M41,13 h1 M54,13 h1 M65,13 h1 M78,13 h1 
+    M89,13 h1 M102,13 h1 M113,13 h1 M126,13 h1 M137,13 h1 M150,13 h1 M162,13 h2 
+    M174,13 h1 M198,13 h1 M209,13 h1 M222,13 h1 M233,13 h1 M246,13 h1 M257,13 h1 
+    M281,13 h1 M6,14 h1 M16,14 h1 M31,14 h1 M40,14 h1 M55,14 h1 M64,14 h1 M79,14 h1 
+    M88,14 h1 M103,14 h1 M112,14 h1 M127,14 h1 M136,14 h1 M151,14 h1 M161,14 h1 
+    M175,14 h1 M199,14 h1 M208,14 h1 M223,14 h1 M232,14 h1 M247,14 h1 M256,14 h1 
+    M280,14 h1 M7,15 h1 M16,15 h1 M31,15 h1 M40,15 h1 M55,15 h1 M64,15 h1 M79,15 h1 
+    M88,15 h1 M103,15 h1 M112,15 h1 M127,15 h1 M136,15 h1 M151,15 h1 M160,15 h1 
+    M175,15 h1 M184,15 h1 M199,15 h1 M208,15 h1 M223,15 h1 M232,15 h1 M247,15 h1 
+    M256,15 h1 M271,15 h1 M280,15 h1 M8,16 h2 M14,16 h2 M32,16 h2 M38,16 h2 M56,16 h2 
+    M62,16 h2 M80,16 h2 M86,16 h2 M104,16 h2 M110,16 h2 M128,16 h2 M134,16 h2 M152,16 h2 
+    M158,16 h2 M176,16 h2 M183,16 h1 M188,16 h1 M200,16 h2 M206,16 h1 M224,16 h1 
+    M231,16 h1 M249,16 h1 M254,16 h2 M267,16 h1 M272,16 h2 M278,16 h2 M10,17 h4 
+    M34,17 h4 M58,17 h4 M82,17 h4 M106,17 h4 M130,17 h4 M154,17 h4 M178,17 h4 M186,17 h3 
+    M202,17 h4 M208,17 h1 M225,17 h1 M227,17 h1 M230,17 h1 M247,17 h1 M250,17 h4 
+    M267,17 h3 M274,17 h4 M226,18 h1 M229,18 h1 M206,19 h1 M226,19 h1 M229,19 h1 
+    M249,19 h1 M207,20 h2 M247,20 h2 M227,21 h2" />
+
+      </symbol>
+
+      <symbol id="px-radio-input-bg" shape-rendering="crispEdges">
+        <path fill="var(--shine)"
+          d="M 2 0 h 2 v 1 h 1 v 1 h 1 v 2 h -1 v 1 h -1 v 1 h -2 v -1 h -1 v -1 h -1 v -2 h 1 v -1 h 1 z" />
+        <path fill="var(--outline)" d="M 2 1 h 2 v 1 h 1 v 2 h -1 v 1 h -2 v -1 h -1 v -2 h1 z" />
+        <path fill="var(--color)" d="M 2 2 h 2 v 2 h -2 z" />
+        <path fill="var(--highlight)" d="M 2 2 h 1 v 1 h -1 z" />
+      </symbol>
+    </svg>
+  </main>
+  <script type="module" src="/src/js/main.ts"></script>
+</body>
+
+</html>

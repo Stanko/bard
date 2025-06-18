@@ -1,4 +1,11 @@
 {
   "editor.formatOnSave": true,
-  "cSpell.words": ["bigrams", "fivegrams", "fourgrams", "ngram"]
+  "cSpell.words": [
+    "bigrams",
+    "fivegrams",
+    "fourgrams",
+    "ngram",
+    "Ngrams",
+    "Ngram"
+  ]
 }

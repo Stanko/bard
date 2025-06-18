@@ -1,0 +1,54 @@
+.app {
+  padding: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+
+  background-color: rgb(232 232 255 / 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.controls {
+  order: 1;
+}
+
+@media (min-width: 800px) {
+  .app {
+    gap: 2rem;
+    padding: 2rem;
+    margin: 0 auto;
+    --border-color: var(--gray-3);
+
+    box-shadow: var(--px) 0 0 0 var(--border-color),
+      0 var(--px) 0 0 var(--border-color),
+      var(--minus-px) 0 0 0 var(--border-color),
+      0 var(--minus-px) 0 0 var(--border-color);
+
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'header header header header poem poem poem poem'
+      'controls controls controls controls poem poem poem poem';
+  }
+
+  .header {
+    grid-area: header;
+  }
+
+  .controls {
+    grid-area: controls;
+    order: unset;
+  }
+
+  .poem {
+    grid-area: poem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .app {
+    padding: 3rem;
+    gap: 3rem;
+  }
+}

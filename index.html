@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glitchy BARD</title>
+
+  <meta content="https://muffinman.io/bard/thumb.png" property="twitter:image">
+  <meta content="https://muffinman.io/bard/thumb.png" property="og:image">
+
+  <meta name="description" content="An experiment in robot poetry.">
+
+  <script>
+    const useMonoFont = localStorage.getItem('mono-font') === 'true';
+    if (useMonoFont) { document.documentElement.classList.add('mono-font'); }
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

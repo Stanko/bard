@@ -1,0 +1,32 @@
+.speech-controls {
+  display: flex;
+  align-items: center;
+}
+
+.speech-controls__play-icon {
+  width: calc(5 * var(--px));
+  height: calc(5 * var(--px));
+}
+
+.speech-controls__sing {
+  padding-left: 0;
+}
+
+.speech-controls__sing-icon {
+  width: calc(6 * var(--px));
+  height: calc(7 * var(--px));
+}
+
+.speech-controls__stop {
+  padding-left: 0;
+}
+
+.speech-controls__stop-icon {
+  width: calc(4 * var(--px));
+  height: calc(4 * var(--px));
+}
+
+.speech-controls__play-icon,
+.speech-controls__sing-icon {
+  margin-top: calc(-0.5 * var(--px));
+}

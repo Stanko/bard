@@ -1,0 +1,22 @@
+.verse {
+  opacity: 0;
+  animation: fly-in 1000ms ease-out forwards;
+  width: fit-content;
+}
+
+.verse--active {
+  color: var(--dark);
+}
+
+.verse__debug {
+  width: fit-content;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.verse__debug > div {
+  display: flex;
+  text-align: right;
+  justify-content: space-between;
+  gap: 2rem;
+}

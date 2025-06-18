@@ -1,0 +1,73 @@
+.button {
+  position: relative;
+  height: calc(18 * var(--px));
+  color: var(--white);
+  font-size: 2rem;
+  display: flex;
+  align-items: stretch;
+  z-index: 1;
+}
+
+.button:focus-visible {
+  outline: var(--px) solid var(--outline);
+}
+
+.button:active:not(:disabled) .button__content {
+  padding-top: calc(5 * var(--px));
+  color: var(--active-white);
+}
+
+.button__content {
+  padding-inline: calc(4 * var(--px));
+  padding-top: calc(4 * var(--px));
+  position: relative;
+  overflow: hidden;
+  line-height: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  max-width: 20rem;
+}
+
+.button__content-bg {
+  height: 200%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  max-width: unset;
+  z-index: -1;
+}
+
+.button:active:not(:disabled) .button__content-bg {
+  top: auto;
+  bottom: 0;
+}
+
+.button__edge {
+  width: calc(8 * var(--px));
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.button__edge-bg {
+  height: 100%;
+  top: 0;
+  left: 0;
+  width: auto;
+  position: absolute;
+  max-width: unset;
+}
+
+.button__edge-bg--right {
+  margin-left: -100%;
+}
+
+.button:active:not(:disabled) .button__edge-bg--left {
+  margin-left: -200%;
+}
+.button:active:not(:disabled) .button__edge-bg--right {
+  margin-left: -300%;
+}

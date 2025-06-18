@@ -1,0 +1,78 @@
+.small-button {
+  display: grid;
+  place-items: center;
+  position: relative;
+  width: calc(16 * var(--px));
+  height: calc(18 * var(--px));
+  color: var(--white);
+  font-size: 2rem;
+  padding-left: var(--px);
+  padding-bottom: calc(2 * var(--px));
+  position: relative;
+  z-index: 1;
+  font-family: var(--px-font);
+}
+
+.small-button__bg-wrapper {
+  overflow: hidden;
+  position: absolute;
+  inset: 0;
+}
+
+.small-button__tooltip {
+  display: none;
+}
+
+@media (hover: hover) {
+  .small-button__tooltip {
+    display: block;
+    position: absolute;
+    bottom: 100%;
+    font-size: 1.5rem;
+    width: max-content;
+    padding-bottom: var(--px);
+    opacity: 0;
+    transition: opacity 250ms, transform 250ms;
+    pointer-events: none;
+    transform: translateY(calc(4 * var(--px)));
+    color: var(--white);
+  }
+
+  .small-button__title {
+    display: block;
+    padding: 0 calc(2 * var(--px));
+    background-color: var(--gray-7);
+    box-shadow: 4px 0 0 0 var(--black), 0 4px 0 0 var(--black),
+      -4px 0 0 0 var(--black), 0 -4px 0 0 var(--black);
+  }
+
+  .small-button:not(:disabled):focus-visible .small-button__tooltip,
+  .small-button:not(:disabled):hover .small-button__tooltip {
+    opacity: 1;
+    transform: none;
+    pointer-events: all;
+  }
+}
+
+.small-button:focus-visible {
+  outline: var(--px) solid var(--outline);
+}
+
+.small-button__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: auto;
+  max-width: unset;
+  z-index: -1;
+}
+
+.small-button:active:not(:disabled) {
+  padding-top: calc(2 * var(--px));
+  color: var(--active-white);
+}
+
+.small-button:active:not(:disabled) .small-button__bg {
+  margin-left: -100%;
+}

@@ -1,0 +1,49 @@
+.rotary-input {
+  --rotary-input-value: 0;
+
+  width: calc(24 * var(--px));
+  height: calc(24 * var(--px));
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+
+  cursor: grab;
+}
+
+.rotary-input:focus-visible {
+  outline: var(--px) solid var(--outline);
+}
+
+@keyframes rotary-input-shake {
+  0% {
+    transform: translateX(0px);
+  }
+  25% {
+    transform: translateX(-1px);
+  }
+  75% {
+    transform: translateX(1px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.rotary-input--shaking {
+  animation: rotary-input-shake 250ms ease-in-out infinite;
+}
+
+.rotary-input__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: auto;
+  max-width: unset;
+  margin-left: calc(var(--rotary-input-value) * -100%);
+}
+
+.dragging,
+.dragging .rotary-input {
+  cursor: grabbing;
+}

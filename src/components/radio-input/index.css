@@ -1,0 +1,21 @@
+.radio-input {
+  --shine: transparent;
+  --color: rgb(131, 126, 134);
+  --highlight: rgb(158, 172, 183);
+
+  display: inline-block;
+  width: calc(6 * var(--px));
+  height: calc(6 * var(--px));
+}
+
+.radio-input__bg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.radio-input:has(input:checked) {
+  --shine: rgb(110 235 48 / 0.4);
+  --color: rgb(110, 235, 48);
+  --highlight: rgb(255 255 255 / 0.5);
+}

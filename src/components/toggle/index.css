@@ -1,0 +1,75 @@
+.toggle {
+  --toggle-bg-position: 2;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-shrink: 0;
+}
+
+.toggle.left .toggle__label {
+  order: -1;
+}
+
+.toggle:has(input:focus-visible) {
+  outline: var(--px) solid var(--outline);
+}
+
+/* .toggle:hover {
+  --toggle-bg-position: 3;
+} */
+
+.toggle:has(input:checked) {
+  --toggle-bg-position: 0;
+}
+
+/* .toggle:has(input:checked):hover {
+  --toggle-bg-position: 1;
+} */
+
+.toggle__light {
+  --shine: transparent;
+  --color: var(--gray-5);
+  --highlight: var(--gray-3);
+
+  display: inline-block;
+  width: calc(6 * var(--px));
+  height: calc(6 * var(--px));
+}
+
+.toggle:has(input:checked) .toggle__light {
+  --shine: rgb(110 235 48 / 0.4);
+  --color: rgb(110, 235, 48);
+  --highlight: rgb(255 255 255 / 0.5);
+}
+
+.toggle__bg-wrapper {
+  width: calc(17 * var(--px));
+  height: calc(25 * var(--px));
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.toggle__bg {
+  height: 100%;
+  width: auto;
+  max-width: unset;
+  margin-left: calc(var(--toggle-bg-position) * -100%);
+}
+
+.toggle__label {
+  writing-mode: vertical-lr;
+  line-height: 1;
+  color: var(--outline);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.toggle.horizontal {
+  align-items: center;
+}
+
+.toggle.horizontal .toggle__label {
+  writing-mode: unset;
+  line-height: 1.3;
+}

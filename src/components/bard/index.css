@@ -1,0 +1,188 @@
+.bard {
+  flex-shrink: 0;
+  width: 29em;
+  height: 31em;
+  font-size: 0.25rem;
+  position: relative;
+}
+
+.bard img {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.glitch img {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.strip {
+  background: url(/bard.png) no-repeat;
+  background-size: 100% auto;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+
+  overflow: hidden;
+  position: relative;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+}
+
+/* Glitch keyframes */
+
+@keyframes glitch-5 {
+  0.00%,
+  33.33%,
+  43.33%,
+  66.67%,
+  76.67%,
+  100.00% {
+    transform: none;
+    filter: hue-rotate(0) drop-shadow(0 0 0 transparent);
+  }
+
+  33.43%,
+  43.23% {
+    transform: translateX(var(--glitch-x-1));
+    filter: hue-rotate(var(--glitch-hue-1))
+      drop-shadow(2em 1em 0 rgb(255 0 0 / 0.1));
+  }
+
+  66.77%,
+  76.57% {
+    transform: translateX(var(--glitch-x-2));
+    filter: hue-rotate(var(--glitch-hue-2))
+      drop-shadow(0em 2em 0 rgb(255 0 0 / 0.1));
+  }
+}
+@keyframes glitch-6 {
+  0.00%,
+  33.33%,
+  41.67%,
+  66.67%,
+  75.00%,
+  100.00% {
+    transform: none;
+    filter: hue-rotate(0) drop-shadow(0 0 0 transparent);
+  }
+
+  33.43%,
+  41.57% {
+    transform: translateX(var(--glitch-x-1));
+    filter: hue-rotate(var(--glitch-hue-1))
+      drop-shadow(0em 1em 0 rgb(0 0 255 / 0.1));
+  }
+
+  66.77%,
+  74.90% {
+    transform: translateX(var(--glitch-x-2));
+    filter: hue-rotate(var(--glitch-hue-2))
+      drop-shadow(1em -2em 0 rgb(255 0 0 / 0.1));
+  }
+}
+@keyframes glitch-7 {
+  0.00%,
+  33.33%,
+  40.48%,
+  66.67%,
+  73.81%,
+  100.00% {
+    transform: none;
+    filter: hue-rotate(0) drop-shadow(0 0 0 transparent);
+  }
+
+  33.43%,
+  40.38% {
+    transform: translateX(var(--glitch-x-1));
+    filter: hue-rotate(var(--glitch-hue-1))
+      drop-shadow(0em 0em 0 rgb(0 0 255 / 0.1));
+  }
+
+  66.77%,
+  73.71% {
+    transform: translateX(var(--glitch-x-2));
+    filter: hue-rotate(var(--glitch-hue-2))
+      drop-shadow(2em 1em 0 rgb(0 0 255 / 0.1));
+  }
+}
+@keyframes glitch-8 {
+  0.00%,
+  33.33%,
+  39.58%,
+  66.67%,
+  72.92%,
+  100.00% {
+    transform: none;
+    filter: hue-rotate(0) drop-shadow(0 0 0 transparent);
+  }
+
+  33.43%,
+  39.48% {
+    transform: translateX(var(--glitch-x-1));
+    filter: hue-rotate(var(--glitch-hue-1))
+      drop-shadow(2em 1em 0 rgb(0 0 255 / 0.1));
+  }
+
+  66.77%,
+  72.82% {
+    transform: translateX(var(--glitch-x-2));
+    filter: hue-rotate(var(--glitch-hue-2))
+      drop-shadow(1em -1em 0 rgb(255 0 0 / 0.1));
+  }
+}
+@keyframes glitch-9 {
+  0.00%,
+  33.33%,
+  38.89%,
+  66.67%,
+  72.22%,
+  100.00% {
+    transform: none;
+    filter: hue-rotate(0) drop-shadow(0 0 0 transparent);
+  }
+
+  33.43%,
+  38.79% {
+    transform: translateX(var(--glitch-x-1));
+    filter: hue-rotate(var(--glitch-hue-1))
+      drop-shadow(1em 1em 0 rgb(0 0 255 / 0.1));
+  }
+
+  66.77%,
+  72.12% {
+    transform: translateX(var(--glitch-x-2));
+    filter: hue-rotate(var(--glitch-hue-2))
+      drop-shadow(0em 1em 0 rgb(0 0 255 / 0.1));
+  }
+}
+@keyframes glitch-10 {
+  0.00%,
+  33.33%,
+  38.33%,
+  66.67%,
+  71.67%,
+  100.00% {
+    transform: none;
+    filter: hue-rotate(0) drop-shadow(0 0 0 transparent);
+  }
+
+  33.43%,
+  38.23% {
+    transform: translateX(var(--glitch-x-1));
+    filter: hue-rotate(var(--glitch-hue-1))
+      drop-shadow(0em -1em 0 rgb(255 0 0 / 0.1));
+  }
+
+  66.77%,
+  71.57% {
+    transform: translateX(var(--glitch-x-2));
+    filter: hue-rotate(var(--glitch-hue-2))
+      drop-shadow(1em -1em 0 rgb(0 0 255 / 0.1));
+  }
+}

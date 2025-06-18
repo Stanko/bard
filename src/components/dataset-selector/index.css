@@ -1,0 +1,27 @@
+.dataset-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.dataset-selector__label {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.dataset-selector__label:has(input:focus-visible) {
+  outline: var(--px) solid var(--outline);
+}
+
+.dataset-selector__label:nth-child(1),
+.dataset-selector__label:nth-child(5) {
+  margin-left: calc(-8 * var(--px));
+}
+
+.dataset-selector__label:nth-child(2),
+.dataset-selector__label:nth-child(4) {
+  margin-left: calc(-2 * var(--px));
+}
