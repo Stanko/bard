@@ -164,6 +164,8 @@ const filePathsShakespeare = ['./text/shakespeare.txt'];
 const filePathsHaikus = ['./text/haikus.txt'];
 const filePathsFZ = ['./text/zappa.txt'];
 
+const filePathsTD = ['./text/td.txt'];
+
 // main({
 //   filePaths: filePathsShakespeare,
 //   nGramsLengths: [2, 3, 4],
@@ -192,8 +194,15 @@ const filePathsFZ = ['./text/zappa.txt'];
 //   parseFromDisk: true,
 // });
 
+// main({
+//   filePaths: filePathsFZ,
+//   nGramsLengths: [2, 3, 4],
+//   reversed: true,
+//   parseFromDisk: true,
+// });
+
 main({
-  filePaths: filePathsFZ,
+  filePaths: filePathsTD,
   nGramsLengths: [2, 3, 4],
   reversed: true,
   parseFromDisk: true,

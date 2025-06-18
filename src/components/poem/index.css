@@ -4,6 +4,49 @@
   gap: 1rem;
 }
 
+.poem__generate-wrapper {
+  position: relative;
+  width: fit-content;
+}
+
+@keyframes levitate {
+  0% {
+    transform: translateY(0) translateX(-50%);
+  }
+  50% {
+    transform: translateY(calc(-1 * var(--px))) translateX(-50%);
+  }
+  100% {
+    transform: translateY(0) translateX(-50%);
+  }
+}
+
+.poem__nudge {
+  display: block;
+  position: absolute;
+  bottom: calc(100% + var(--px));
+  left: 50%;
+  font-size: 1.5rem;
+  width: max-content;
+  padding-bottom: var(--px);
+  opacity: 0;
+  transition: opacity 250ms, transform 250ms;
+  pointer-events: none;
+  transform: translateY(calc(4 * var(--px))) translateX(-50%);
+  color: var(--white);
+  padding: 0 calc(2 * var(--px));
+  background-color: var(--gray-7);
+  box-shadow: 4px 0 0 0 var(--black), 0 4px 0 0 var(--black),
+    -4px 0 0 0 var(--black), 0 -4px 0 0 var(--black);
+  pointer-events: none;
+}
+
+.poem__nudge--show {
+  animation: levitate 2000ms ease-in-out infinite;
+  opacity: 1;
+  transform: translateX(-50%);
+}
+
 .poem__verses {
   display: flex;
   flex-direction: column;

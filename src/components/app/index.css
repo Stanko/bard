@@ -1,24 +1,42 @@
+#root {
+  background-color: var(--white-transparent);
+  backdrop-filter: blur(10px);
+  min-height: 100svh;
+  padding: 2rem;
+}
+
 .app {
-  padding: 1.5rem;
   display: grid;
-  gap: 1.5rem;
+  gap: 2rem;
   max-width: var(--content-max-width);
   margin: 0 auto;
-
-  background-color: rgb(232 232 255 / 0.3);
-  backdrop-filter: blur(10px);
 }
 
 .controls {
   order: 1;
 }
 
+@media (min-width: 600px) {
+  #root {
+    padding: 2rem 3rem;
+  }
+}
+
 @media (min-width: 800px) {
+  #root {
+    background-color: transparent;
+    backdrop-filter: none;
+    padding: 0;
+  }
+
   .app {
     gap: 2rem;
     padding: 2rem;
     margin: 0 auto;
     --border-color: var(--gray-3);
+
+    background-color: var(--white-transparent);
+    backdrop-filter: blur(10px);
 
     box-shadow: var(--px) 0 0 0 var(--border-color),
       0 var(--px) 0 0 var(--border-color),

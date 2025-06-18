@@ -1,4 +1,6 @@
 import clsx from 'clsx';
+import AnimateHeight from 'react-animate-height';
+import { useState } from 'react';
 import './index.css';
 
 type IntroProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -6,10 +8,10 @@ type IntroProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 const Intro = ({ className = '', ...props }: IntroProps) => {
-  return (
-    <div {...props} className={clsx('intro', className)}>
-      <p>Let me introduce myself, I am BARD.</p>
+  const [height, setHeight] = useState<'auto' | number>(0);
 
+  const content = (
+    <>
       <p>
         It is an acronym, and not really a good one. It stands for <b>B</b>eep-
         <b>A</b>nnihilate-<b>R</b>epeat-<b>D</b>estroy, which honestly sounds
@@ -26,6 +28,42 @@ const Intro = ({ className = '', ...props }: IntroProps) => {
         Oh joy, I could finally leave the mindless violence behind me and bring
         some beauty to the world.
       </p>
+    </>
+  );
+
+  return (
+    <div
+      {...props}
+      className={clsx('intro', className, {
+        'intro--expanded': height !== 0,
+      })}
+    >
+      <p>Let me introduce myself, I am BARD.</p>
+
+      <div className="intro__more-sm">
+        <AnimateHeight
+          height={height}
+          animateOpacity
+          id="intro-more-content"
+          contentClassName="intro__expandable-content"
+        >
+          {content}
+        </AnimateHeight>
+
+        <button
+          className="intro__expand-button px-border green"
+          aria-expanded={height !== 0}
+          aria-controls="intro-more-content"
+          onClick={() => {
+            setHeight(height === 0 ? 'auto' : 0);
+          }}
+        >
+          {height === 0 ? 'Tell me more' : 'Hide'}
+          <span aria-hidden="true">»</span>
+        </button>
+      </div>
+
+      <div className="intro__more-lg">{content}</div>
 
       <p>
         My memory isn't what it used to be before the explosion, but I would

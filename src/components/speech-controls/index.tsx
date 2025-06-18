@@ -12,6 +12,11 @@ type SpeechControlsProps = React.HTMLAttributes<HTMLDivElement> & {
   verses: Verse[];
 };
 
+const checkIfVoiceExists = (voice: string): boolean => {
+  const voices = window.speechSynthesis.getVoices();
+  return voices.some((v) => v.name === voice);
+};
+
 const SpeechControls = ({
   className = '',
   verses,
@@ -33,6 +38,8 @@ const SpeechControls = ({
       play();
     }
   }, [verses]);
+
+  const noOrganVoice = !checkIfVoiceExists('Organ');
 
   useEffect(() => {
     if (activeVerse >= 0 && activeVerse < verses.length) {
@@ -66,55 +73,62 @@ const SpeechControls = ({
   const playDisabled = verses.length === 0 || activeVerse > -1;
 
   return (
-    <div {...props} className={clsx('speech-controls', className)}>
-      <SmallButton
-        disabled={playDisabled}
-        onClick={() => play()}
-        title="Read poem"
-      >
-        <svg
-          viewBox="0 0 5 5"
-          shapeRendering="crispEdges"
-          className="speech-controls__play-icon"
+    <>
+      <div {...props} className={clsx('speech-controls', className)}>
+        <SmallButton
+          disabled={playDisabled}
+          onClick={() => play()}
+          title="Read poem"
         >
-          <path
-            fill="currentColor"
-            d="M 0 0 h 2 v 1 h 2 v 1 h1 v 1 h -1 v 1 h -2 v 1 h -2 z"
-          />
-        </svg>
-      </SmallButton>
-      <SmallButton
-        className="speech-controls__sing"
-        disabled={playDisabled}
-        onClick={sing}
-        title="Sing poem"
-      >
-        <svg
-          viewBox="0 0 6 7"
-          shapeRendering="crispEdges"
-          className="speech-controls__sing-icon"
+          <svg
+            viewBox="0 0 5 5"
+            shapeRendering="crispEdges"
+            className="speech-controls__play-icon"
+          >
+            <path
+              fill="currentColor"
+              d="M 0 0 h 2 v 1 h 2 v 1 h1 v 1 h -1 v 1 h -2 v 1 h -2 z"
+            />
+          </svg>
+        </SmallButton>
+        <SmallButton
+          className="speech-controls__sing"
+          disabled={playDisabled || noOrganVoice}
+          onClick={sing}
+          title={'Sing poem'}
         >
-          <path
-            fill="currentColor"
-            d="M 3 0 h1 v1 h1 v1 h1 v1 h-1 v-1 h-1 v4 h-1 v1 h-2 v-1 h-1 v-1 h1 v-1 h2 z"
-          />
-        </svg>
-      </SmallButton>
-      <SmallButton
-        className="red speech-controls__stop"
-        disabled={stopDisabled}
-        onClick={stop}
-        title="Stop"
-      >
-        <svg
-          viewBox="0 0 4 4"
-          shapeRendering="crispEdges"
-          className="speech-controls__stop-icon"
+          <svg
+            viewBox="0 0 6 7"
+            shapeRendering="crispEdges"
+            className="speech-controls__sing-icon"
+          >
+            <path
+              fill="currentColor"
+              d="M 3 0 h1 v1 h1 v1 h1 v1 h-1 v-1 h-1 v4 h-1 v1 h-2 v-1 h-1 v-1 h1 v-1 h2 z"
+            />
+          </svg>
+        </SmallButton>
+        <SmallButton
+          className="red speech-controls__stop"
+          disabled={stopDisabled}
+          onClick={stop}
+          title="Stop"
         >
-          <path fill="currentColor" d="M 0 0 h 4 v 4 H 0 z" />
-        </svg>
-      </SmallButton>
-    </div>
+          <svg
+            viewBox="0 0 4 4"
+            shapeRendering="crispEdges"
+            className="speech-controls__stop-icon"
+          >
+            <path fill="currentColor" d="M 0 0 h 4 v 4 H 0 z" />
+          </svg>
+        </SmallButton>
+      </div>
+      {noOrganVoice && (
+        <div className="red">
+          Unfortunately, singing works only on iOS and macOS for now
+        </div>
+      )}
+    </>
   );
 };
 

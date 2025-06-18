@@ -4,7 +4,7 @@ export type DatasetName = 'fz' | 'lotr' | 'hp' | 'shkspr' | 'td';
 export type Dataset = {
   name: DatasetName;
   value: number;
-  theme: 'yellow' | 'blue' | 'green' | 'red';
+  theme: 'yellow' | 'blue' | 'green' | 'red' | 'purple';
   disabled?: boolean;
 };
 
@@ -13,7 +13,7 @@ export const datasets: Dataset[] = [
   { name: 'td', value: 1, theme: 'blue' },
   { name: 'lotr', value: 2, theme: 'green' },
   { name: 'hp', value: 3, theme: 'red' },
-  { name: 'shkspr', value: 4, theme: 'blue' },
+  { name: 'shkspr', value: 4, theme: 'purple' },
 ];
 
 export const getDefaultOptions = (): Options => {

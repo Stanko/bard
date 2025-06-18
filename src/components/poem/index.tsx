@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useCallback, useEffect, useState } from 'react';
 import useGeneratePoem from '../../hooks/use-generate-poem';
 import { getSeed } from '../../lib/get-seed';
-import type { Options } from '../../lib/options';
+import { datasets, type Options } from '../../lib/options';
 import { useNgramsStore } from '../../stores/ngrams';
 import { useOptionsStore } from '../../stores/options';
 import { useSpeechStore } from '../../stores/speech';
@@ -30,6 +30,7 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
   const [lastGeneratedKey, setLastGeneratedKey] = useState('');
   const [isGenerateClicked, setIsGenerateClicked] = useState(false);
   const [loadingDatasetName, setLoadingDatasetName] = useState('');
+  const [showNudge, setShowNudge] = useState(false);
 
   const ngrams = ngramsStore.data[options.dataset];
   const loading = ngramsStore.loading[options.dataset];
@@ -50,16 +51,24 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
   } = useGeneratePoem();
 
   const generate = useCallback(() => {
+    setShowNudge(false);
     setLastGeneratedKey(currentKey);
     generateVerses();
   }, [currentKey, generateVerses]);
 
+  // TODO this causes for re-generating when user is spinning the dataset control
+  //
+  // useEffect(() => {
+  //   // If the options were changed, but the data is
+  //   // already loaded start generating the poem
+  //   if (ngrams && !loading) {
+  //     generate();
+  //   }
+  // }, [currentKey]);
+
   useEffect(() => {
-    // If the options were changed, but the data is
-    // already loaded start generating the poem
-    if (ngrams && !loading) {
-      generate();
-    }
+    console.log('currentKey changed');
+    setShowNudge(true);
   }, [currentKey]);
 
   useEffect(() => {
@@ -141,15 +150,29 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
   const showPoem = !error && verses.length > 0;
   const showTime = !error && time > 0 && !generating;
 
+  const activeDataset = datasets.find(
+    (dataset) => dataset.name === options.dataset
+  );
+
   return (
     <div {...props} className={clsx('poem', className)}>
-      <Button
-        disabled={generating}
-        onClick={handleGenerateClick}
-        className="poem__generate"
-      >
-        {label}
-      </Button>
+      <div className="poem__generate-wrapper">
+        <Button
+          disabled={generating}
+          onClick={handleGenerateClick}
+          className={clsx('poem__generate', activeDataset?.theme)}
+        >
+          {label}
+        </Button>
+        <div
+          className={clsx('poem__nudge', {
+            'poem__nudge--show':
+              showNudge && !generating && !isAlreadyGenerated(),
+          })}
+        >
+          Click to regenerate!
+        </div>
+      </div>
 
       {error && (
         <div className="red">
@@ -184,7 +207,9 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
                 verses={verses}
               />
               <div className="poem__time muted">
-                Poem generated in {time} ms
+                Poem generated in {time.toFixed(1)} ms
+                <br />
+                You can share the poem by copying the URL.
               </div>
             </>
           )}

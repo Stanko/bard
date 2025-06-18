@@ -93,6 +93,9 @@ const useGeneratePoem = () => {
     setGenerating(true);
     setError(null);
     setTime(0);
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current);
+    }
 
     if (options.haiku) {
       const start = performance.now();

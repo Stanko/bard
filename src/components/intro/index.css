@@ -1,6 +1,36 @@
-.intro {
+.intro__expand-button {
+  --border-color: var(--outline);
+  padding: 0 0.5rem;
+  color: var(--white);
+  background: var(--mid);
+  margin: 1rem 0;
 }
 
-.intro p + p {
-  margin-top: 1rem;
+.intro__expand-button span {
+  position: relative;
+  display: inline-block;
+  transform: rotate(90deg) translateX(1px);
+}
+
+.intro--expanded .intro__expand-button span {
+  transform: rotate(-90deg) translateX(1px);
+}
+
+.intro__expandable-content {
+  padding-top: 1rem;
+}
+
+.intro__more-lg {
+  display: none;
+}
+
+@media (min-width: 800px) {
+  .intro__more-sm {
+    display: none;
+  }
+
+  .intro__more-lg {
+    margin: 1rem 0;
+    display: block;
+  }
 }

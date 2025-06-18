@@ -6,6 +6,12 @@
   align-self: flex-start;
 }
 
+@media (min-width: 600px) {
+  .controls {
+    max-width: none;
+  }
+}
+
 .controls__toggles {
   display: flex;
   gap: 1rem;
@@ -20,6 +26,7 @@
 .controls__seed-input {
   max-width: calc(100% - 4rem);
   overflow: hidden;
+  flex-grow: 1;
 }
 
 .controls__seed-button {

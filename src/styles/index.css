@@ -16,7 +16,8 @@
   --px: 0.25rem;
   --minus-px: -0.25rem;
   --white: #ffffff;
-  --active-white: rgb(255, 255, 255, 0.9);
+  --white-transparent: rgb(232 232 255 / 0.3);
+  --active-white: rgb(255 255 255 / 0.9);
   --bg-color: #d5d8e3;
   --black: #000000;
 
@@ -57,7 +58,6 @@
 html {
   font-size: 75%;
   scrollbar-gutter: stable;
-
   background-image: url(/bg.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -66,7 +66,6 @@ html {
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
-  /* filter: saturate(0.01) brightness(2) contrast(0.1); */
 }
 
 body {
@@ -128,6 +127,7 @@ pre {
   overflow: auto;
   scrollbar-color: var(--gray-4) transparent;
   scrollbar-width: thin;
+  padding: 0.5rem 0;
 }
 
 dialog {
@@ -146,8 +146,15 @@ h1 {
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   line-height: 1;
+  margin-bottom: 2rem;
+}
+
+h3 {
+  font-size: 2.25rem;
+  line-height: 1;
+  margin: 2rem 0 1rem;
 }
 
 a,
@@ -177,6 +184,10 @@ b {
   text-decoration: underline;
 }
 
+p + p {
+  margin-top: 1rem;
+}
+
 .dragging {
   user-select: none;
 }
@@ -200,16 +211,23 @@ b {
 
 .green {
   --outline: rgb(35, 72, 31);
-  --light: rgb(165, 222, 153);
-  --mid: rgb(98, 184, 92);
-  --dark: rgb(58, 121, 52);
+  --light: rgb(74, 220, 67);
+  --mid: rgb(64, 167, 57);
+  --dark: rgb(42, 120, 35);
 }
 
 .yellow {
   --outline: rgb(88, 56, 7);
-  --light: rgb(240, 240, 107);
-  --mid: rgb(234, 220, 60);
+  --light: rgb(253, 251, 116);
+  --mid: rgb(216, 200, 16);
   --dark: rgb(185, 165, 38);
+}
+
+.purple {
+  --outline: rgb(66, 25, 92);
+  --light: rgb(205, 151, 238);
+  --mid: rgb(141, 73, 184);
+  --dark: rgb(113, 58, 147);
 }
 
 .muted,

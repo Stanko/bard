@@ -15,7 +15,6 @@
   text-transform: uppercase;
   line-height: 1.2;
   border: none;
-  max-width: max-content;
   width: min-content;
   color: var(--light);
   background-color: var(--dark);
