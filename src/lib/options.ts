@@ -9,11 +9,11 @@ export type Dataset = {
 };
 
 export const datasets: Dataset[] = [
-  { name: 'fz', value: 0, theme: 'yellow' },
-  { name: 'td', value: 1, theme: 'blue' },
-  { name: 'lotr', value: 2, theme: 'green' },
-  { name: 'hp', value: 3, theme: 'red' },
-  { name: 'shkspr', value: 4, theme: 'purple' },
+  { name: 'fz', value: 0, theme: 'blue' },
+  // { name: 'td', value: 4, theme: 'yellow' },
+  { name: 'lotr', value: 1, theme: 'green' },
+  { name: 'hp', value: 2, theme: 'red' },
+  { name: 'shkspr', value: 3, theme: 'purple' },
 ];
 
 export const getDefaultOptions = (): Options => {

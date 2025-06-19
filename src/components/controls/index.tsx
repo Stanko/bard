@@ -56,6 +56,7 @@ const Controls = ({ className = '', ...props }: ControlsProps) => {
         </SmallButton>
       </div>
 
+      <div>Dataset</div>
       <div className="controls__datasets">
         <DatasetSelector
           value={options.dataset}

@@ -26,7 +26,7 @@ const DatasetSelector = ({
         onChange={(v) => onChange(datasets[v].name as DatasetName)}
         offset={1}
         min={0}
-        max={4}
+        max={3}
       />
       <div className="dataset-selector__radios">
         {datasets.map((option) => (
