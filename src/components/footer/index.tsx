@@ -20,7 +20,11 @@ const Footer = ({ className = '', ...props }: ComponentProps) => {
       <a href="https://muffinman.io">Made by MuffinMan</a>
       <ToggleFont />
 
-      <Dialog onClose={() => setIsAboutOpen(false)} isOpen={isAboutOpen}>
+      <Dialog
+        onClose={() => setIsAboutOpen(false)}
+        isOpen={isAboutOpen}
+        className="px8-font"
+      >
         <h2>
           About BARD <a href="https://muffinman.io">by MuffinMan</a>
         </h2>

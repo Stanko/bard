@@ -34,7 +34,7 @@ const Intro = ({ className = '', ...props }: IntroProps) => {
   return (
     <div
       {...props}
-      className={clsx('intro', className, {
+      className={clsx('intro', 'px8-font', className, {
         'intro--expanded': height !== 0,
       })}
     >

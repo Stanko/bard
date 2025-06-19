@@ -8,8 +8,30 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'match7';
+  src: url('/match7/Match7.ttf') format('truetype'),
+    url('/match7/Match7.woff2') format('woff2'),
+    url('/match7/Match7.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'nope8';
+  src: url('/nope8/Nope8.ttf') format('truetype'),
+    url('/nope8/Nope8.woff2') format('woff2'),
+    url('/nope8/Nope8.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --px-font: 'tiny5', sans-serif;
+  --px7-font: 'match7', sans-serif;
+  --px8-font: 'nope8', sans-serif;
   --mono-font: Menlo, 'DejaVu Sans Mono', ui-monospace, 'Fira Code',
     'Cascadia Code', 'Source Code Pro', Consolas, monospace;
 
@@ -47,6 +69,18 @@
   scrollbar-color: var(--gray-4) transparent;
 }
 
+.px7-font {
+  font-family: var(--px7-font);
+  line-height: 0.875;
+  font-size: 1.25em;
+}
+
+.px8-font {
+  font-family: var(--px8-font);
+  line-height: 1.125;
+  font-size: 1.125em;
+}
+
 *,
 *::before,
 *::after {
@@ -56,7 +90,7 @@
 }
 
 html {
-  font-size: 75%;
+  font-size: 81.25%;
   scrollbar-gutter: stable;
   background-image: url(/bg.png);
   background-repeat: no-repeat;
