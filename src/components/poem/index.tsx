@@ -129,7 +129,7 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
   const error = versesError || ngramsError;
 
   let label = [
-    'Generate',
+    'New',
     options.dataset.toLocaleUpperCase(),
     options.haiku ? 'haiku' : 'poem',
   ].join(' ');
@@ -171,7 +171,7 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
               showNudge && !generating && !isAlreadyGenerated,
           })}
         >
-          Click to regenerate!
+          Generate!
         </div>
       </div>
 

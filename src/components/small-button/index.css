@@ -39,11 +39,15 @@
   }
 
   .small-button__title {
+    --border-color: var(--black);
+
     display: block;
     padding: 0 calc(2 * var(--px));
     background-color: var(--gray-7);
-    box-shadow: 4px 0 0 0 var(--black), 0 4px 0 0 var(--black),
-      -4px 0 0 0 var(--black), 0 -4px 0 0 var(--black);
+    box-shadow: var(--px) 0 0 0 var(--border-color),
+      0 var(--px) 0 0 var(--border-color),
+      var(--minus-px) 0 0 0 var(--border-color),
+      0 var(--minus-px) 0 0 var(--border-color);
   }
 
   .small-button:not(:disabled):focus-visible .small-button__tooltip,
