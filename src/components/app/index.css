@@ -70,3 +70,14 @@
     gap: 3rem;
   }
 }
+
+.noscript {
+  text-align: center;
+  padding: 2rem;
+  color: var(--black);
+}
+
+.noscript p {
+  margin-top: 1rem;
+  color: var(--gray-6);
+}

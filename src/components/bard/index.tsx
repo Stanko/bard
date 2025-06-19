@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { random } from '../../lib/random';
-import Cartridge from '../cartridges copy';
+import Cartridges from '../cartridges';
 import './index.css';
 
 type BardProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -96,7 +96,7 @@ const Bard = ({ className = '', ...props }: BardProps) => {
         })}
       </div>
 
-      <Cartridge />
+      <Cartridges />
     </div>
   );
 };

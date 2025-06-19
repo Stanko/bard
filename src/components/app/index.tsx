@@ -4,7 +4,11 @@ import Header from '../header';
 import Poem from '../poem';
 import './index.css';
 
-const App = () => {
+type AppProps = {
+  addGoatCounter?: boolean;
+};
+
+const App = ({ addGoatCounter = false }: AppProps) => {
   return (
     <>
       <main className="app">
@@ -13,6 +17,14 @@ const App = () => {
         <Poem />
       </main>
       <Footer />
+
+      {(addGoatCounter || import.meta.env.MODE === 'production') && (
+        <script
+          data-goatcounter="https://muffinman_io.goatcounter.com/count"
+          async
+          src="//gc.zgo.at/count.js"
+        />
+      )}
     </>
   );
 };

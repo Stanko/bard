@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "vite",
-    "build": "rm -rf ./docs && tsc -b && vite build && touch ./docs/.nojekyll",
+    "build": "rm -rf ./docs && tsc -b && vite build && ADD_GC=true bun ./src/prerender.jsx && touch ./docs/.nojekyll",
     "lint": "eslint .",
     "preview": "vite preview"
   },

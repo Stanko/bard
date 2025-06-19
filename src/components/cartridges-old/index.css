@@ -1,0 +1,8 @@
+.cartridges {
+  position: absolute;
+  inset: 0;
+}
+
+.cartridges__cartridge {
+  height: 100%;
+}

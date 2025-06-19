@@ -1,6 +1,6 @@
 import clsx from 'clsx';
+import CartridgesOld from '../cartridges-old';
 import './index.css';
-import Cartridges from '../cartridges';
 
 type BardOldProps = React.HTMLAttributes<HTMLDivElement> & {
   className?: string;
@@ -284,7 +284,7 @@ const BardOld = ({ className = '', ...props }: BardOldProps) => {
         />
       </div>
 
-      <Cartridges />
+      <CartridgesOld />
     </div>
   );
 };

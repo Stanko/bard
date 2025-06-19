@@ -38,9 +38,7 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
 
   const currentKey = optionsToKey(options);
 
-  const isAlreadyGenerated = () => {
-    return lastGeneratedKey === currentKey;
-  };
+  const isAlreadyGenerated = lastGeneratedKey === currentKey;
 
   const {
     generateVerses,
@@ -111,7 +109,7 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
       return;
     }
 
-    if (isAlreadyGenerated()) {
+    if (isAlreadyGenerated) {
       // If the seed hasn't changed, generate a new one
       setOptions({
         seed: getSeed(),
@@ -130,7 +128,11 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
     loadingDatasetName !== '';
   const error = versesError || ngramsError;
 
-  let label = 'Generate ' + (options.haiku ? 'haiku' : 'poem');
+  let label = [
+    'Generate',
+    options.dataset.toLocaleUpperCase(),
+    options.haiku ? 'haiku' : 'poem',
+  ].join(' ');
 
   if (loading) {
     label = 'Loading rhymes...';
@@ -166,7 +168,7 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
         <div
           className={clsx('poem__nudge', {
             'poem__nudge--show':
-              showNudge && !generating && !isAlreadyGenerated(),
+              showNudge && !generating && !isAlreadyGenerated,
           })}
         >
           Click to regenerate!

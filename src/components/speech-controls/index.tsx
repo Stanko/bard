@@ -13,6 +13,10 @@ type SpeechControlsProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 const checkIfVoiceExists = async (voice: string): Promise<boolean> => {
+  if (typeof window === 'undefined') {
+    return false; // Mock for pre-rendering
+  }
+
   return new Promise((resolve) => {
     // Wait for voices to be loaded
     if (speechSynthesis.getVoices().length === 0) {
@@ -36,7 +40,6 @@ const checkIfVoiceExists = async (voice: string): Promise<boolean> => {
 let noOrganVoice = false;
 
 checkIfVoiceExists('Organ').then((exists) => {
-  console.log('Organ voice exists:', exists);
   noOrganVoice = !exists;
 });
 

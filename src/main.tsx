@@ -7,7 +7,9 @@ import App from './components/app';
 import Options from './components/options';
 import SvgSymbols from './components/svg-symbols';
 
-createRoot(document.getElementById('root')!).render(
+const root = document.getElementById('root') as HTMLDivElement;
+
+createRoot(root).render(
   <StrictMode>
     <Options>
       <App />

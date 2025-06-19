@@ -9,6 +9,30 @@ type ToggleFontProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
 
 const MONO_FONT_ID = 'mono-font';
 
+// Mock localStorage for pre-rendering
+let localStorage: {
+  getItem: (key: string) => string | null;
+  setItem: (key: string, value: string) => void;
+  removeItem: (key: string) => void;
+};
+
+if (typeof window === 'undefined') {
+  localStorage = {
+    getItem: (key: string) => {
+      console.log(`Get ${key}`);
+      return null;
+    },
+    setItem: (key: string, value: string) => {
+      console.log(`Set ${key} to ${value}`);
+    },
+    removeItem: (key: string) => {
+      console.log(`Remove ${key}`);
+    },
+  };
+} else {
+  localStorage = window.localStorage;
+}
+
 const ToggleFont = ({ className = '', ...props }: ToggleFontProps) => {
   const [checked, setChecked] = useState(
     localStorage.getItem(MONO_FONT_ID) === 'true'
@@ -19,10 +43,12 @@ const ToggleFont = ({ className = '', ...props }: ToggleFontProps) => {
       checked={checked}
       onChange={(checked) => {
         setChecked(checked);
-        localStorage.setItem(MONO_FONT_ID, String(checked));
+
         if (checked) {
+          localStorage.setItem(MONO_FONT_ID, 'true');
           document.documentElement.classList.add(MONO_FONT_ID);
         } else {
+          localStorage.removeItem(MONO_FONT_ID);
           document.documentElement.classList.remove(MONO_FONT_ID);
         }
       }}

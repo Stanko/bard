@@ -1,6 +1,9 @@
 export let dictionary: Record<string, string[]> = {};
 
 const init = async () => {
+  if (typeof window === 'undefined') {
+    return; // Check for pre-rendering
+  }
   dictionary = await fetch('./cmu.json').then((res) => res.json());
 };
 
