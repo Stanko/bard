@@ -68,10 +68,6 @@ html {
   image-rendering: crisp-edges;
 }
 
-body {
-  filter: none;
-}
-
 @media (min-width: 600px) {
   html {
     font-size: 100%;

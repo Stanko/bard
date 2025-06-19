@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import './index.css';
-import Toggle from '../toggle';
 import { useState } from 'react';
+import Toggle from '../toggle';
+import './index.css';
 
 type ToggleFontProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
   className?: string;

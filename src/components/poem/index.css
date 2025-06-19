@@ -31,9 +31,9 @@
   width: max-content;
   padding-bottom: var(--px);
   opacity: 0;
-  transition: opacity 250ms, transform 250ms;
+  transition: opacity 250ms;
   pointer-events: none;
-  transform: translateY(calc(4 * var(--px))) translateX(-50%);
+  transform: translateX(-50%);
   color: var(--white);
   padding: 0 calc(2 * var(--px));
   background-color: var(--gray-7);
@@ -47,7 +47,6 @@
 .poem__nudge--show {
   animation: levitate 2000ms ease-in-out infinite;
   opacity: 1;
-  transform: translateX(-50%);
 }
 
 .poem__verses {
