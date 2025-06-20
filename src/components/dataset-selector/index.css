@@ -4,11 +4,6 @@
   gap: 0.125rem;
 }
 
-.dataset-selector__rotary {
-  /* To compensate for the 5th dataset line */
-  margin-top: calc(8 * var(--px));
-}
-
 .dataset-selector__label {
   display: flex;
   gap: 0.5rem;

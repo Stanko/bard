@@ -1,6 +1,3 @@
-import * as fs from 'fs';
-import { loadJsonFiles } from './json-loader';
-
 export type Item = {
   total: number;
   followUps: { [key: string]: number };
@@ -22,33 +19,47 @@ export const textToSentences = (
   const splitRegex = splitOnNewLines ? /[.!?\n]+/ : /[.!?]/;
   const WORDS_TO_REMOVE = ["'", '-'];
 
-  return text
-    .split(splitRegex)
-    .map((sentence) => sentence.trim())
-    .filter((sentence) => sentence.length > 0)
-    .map((sentence) => {
-      const words = sentence
-        .toUpperCase()
-        // TODO
-        // Not sure what to do here
-        // Removing apostrophes is not great, because it removes it from words like "I'm"
-        // but some texts have apostrophes around conversations which is even worse
-        .replace(/[^A-Z-\s]/g, '')
-        // Remove multiple occurrences of "-" with a single one
-        .replace(/-+/g, '-')
-        .split(/\s+/)
-        .filter((word) => word.length)
-        .filter((word) => !WORDS_TO_REMOVE.includes(word));
+  return (
+    text
+      // replace 3+ spaces with a full stop to indicate a sentence break
+      .replace(/\s\s+/g, '.')
+      // replace multiple full stops with a single one
+      .replace(/\.+/g, '.')
+      // replace multiple spaces with a single one
+      .replace(/\s+/g, ' ')
+      // now split into sentences
+      .split(splitRegex)
+      .map((sentence) => sentence.trim())
+      .filter((sentence) => sentence.length > 0)
+      .map((sentence) => {
+        const words = sentence
+          .toUpperCase()
+          // replace long dash and en dash (— and –) with hyphen (-)
+          .replace(/(—|–)/g, '-')
+          // keep apostrophes that are in the middle of words
+          .replace(/('\s|\s')/g, '')
+          // keep dashes that are in the middle of words
+          .replace(/(-\s|\s-)/g, '')
+          // replace multiple apostrophes with a single one
+          .replace(/'+/g, "'")
+          // replace multiple dashes with a single one
+          .replace(/-+/g, '-')
+          // remove any character that is not a letter, hyphen, apostrophe, or space
+          .replace(/[^A-Z-'\s]/g, '')
+          .split(/\s+/)
+          .filter((word) => word.length)
+          .filter((word) => !WORDS_TO_REMOVE.includes(word));
 
-      return [START_TOKEN, ...words, END_TOKEN];
-    })
-    .filter((sentence) => sentence.length > 2)
-    .map((sentence) => {
-      if (reversed) {
-        return sentence.reverse();
-      }
-      return sentence;
-    });
+        return [START_TOKEN, ...words, END_TOKEN];
+      })
+      .filter((sentence) => sentence.length > 2)
+      .map((sentence) => {
+        if (reversed) {
+          return sentence.reverse();
+        }
+        return sentence;
+      })
+  );
 };
 
 export const generateNGrams = (sentences: string[][], n: number): NGram => {
@@ -83,22 +94,6 @@ export const generateNGrams = (sentences: string[][], n: number): NGram => {
   });
 
   return nGram;
-};
-
-export const readNGramsFromDisk = async (
-  dir: string,
-  nGramsLengths: number[]
-): Promise<NGram[]> => {
-  const files = nGramsLengths.map((n) => `${dir}/ngrams-${n}.json`);
-
-  try {
-    const results = await loadJsonFiles<NGram>(files);
-
-    return results as NGram[];
-  } catch (err) {
-    console.error('Failed to load files:', err);
-    throw err;
-  }
 };
 
 const selectRandomFromItem = (item: Item): string => {

@@ -13,7 +13,7 @@ export type NgramsStore = {
 // Estimate compression ratio for JSON data
 const COMPRESSION_RATIO =
   typeof window !== 'undefined' && window.location.hostname !== 'localhost'
-    ? 5
+    ? 10 // In production actual compression is between 1/8 and 1/10
     : 1;
 
 const fetchWithProgress = async (
@@ -82,9 +82,6 @@ export const useNgramsStore = create<NgramsStore>()((set, get) => ({
 
     try {
       const urls = [
-        // `https://muffinman.io/bard/ngrams/${path}/ngrams-2.json`,
-        // `https://muffinman.io/bard/ngrams/${path}/ngrams-3.json`,
-        // `https://muffinman.io/bard/ngrams/${path}/ngrams-4.json`,
         `./ngrams/${path}/ngrams-2.json`,
         `./ngrams/${path}/ngrams-3.json`,
         `./ngrams/${path}/ngrams-4.json`,

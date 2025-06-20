@@ -9,11 +9,11 @@ type CartridgesOldProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 const images: Record<DatasetName, string> = {
-  fz: './yellow.gif',
-  td: './blue.gif',
-  lotr: './green.gif',
-  hp: './red.gif',
-  shkspr: './blue.gif',
+  fz: './cartridges/blue.gif',
+  hhgg: './cartridges/yellow.gif',
+  lotr: './cartridges/green.gif',
+  hp: './cartridges/red.gif',
+  shkspr: './cartridges/purple.gif',
 };
 
 const CartridgesOld = ({ className = '', ...props }: CartridgesOldProps) => {

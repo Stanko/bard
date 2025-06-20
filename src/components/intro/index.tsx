@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import AnimateHeight from 'react-animate-height';
 import { useState } from 'react';
 import './index.css';
+import { datasets } from '../../lib/options';
 
 type IntroProps = React.HTMLAttributes<HTMLDivElement> & {
   className?: string;
@@ -29,6 +30,15 @@ const Intro = ({ className = '', ...props }: IntroProps) => {
         some beauty to the world.
       </p>
     </>
+  );
+
+  const min = datasets.reduce(
+    (min, dataset) => Math.min(min, dataset.size),
+    Infinity
+  );
+  const max = datasets.reduce(
+    (max, dataset) => Math.max(max, dataset.size),
+    -Infinity
   );
 
   return (
@@ -72,8 +82,8 @@ const Intro = ({ className = '', ...props }: IntroProps) => {
       </p>
 
       <p>
-        Please be aware, my datasets are rather substantial - roughly 50
-        megabytes apiece. Poetry may be light, but data isn't.
+        Please be aware, my datasets are rather substantial - between {min} and{' '}
+        {max} megabytes apiece. Poetry may be light, but data isn't.
       </p>
     </div>
   );

@@ -22,6 +22,9 @@ const NgramsState = ({ className = '', ...props }: NgramsStateProps) => {
             className={clsx('ngrams-state__progress', dataset.theme)}
           >
             {error && <div className="ngrams-state__error">error</div>}
+            {!progress && (
+              <div className="ngrams-state__size">{dataset.size} Mb</div>
+            )}
             <div
               className="ngrams-state__bar"
               style={{
