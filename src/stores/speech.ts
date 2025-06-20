@@ -55,7 +55,6 @@ export const useSpeechStore = create<SpeechStore>()((set, get) => ({
 
     if (removeEndListener) {
       removeEndListener();
-      // window.speechSynthesis.cancel();
     }
 
     set(

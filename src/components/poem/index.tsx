@@ -54,16 +54,6 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
     generateVerses();
   }, [currentKey, generateVerses]);
 
-  // TODO this causes for re-generating when user is spinning the dataset control
-  //
-  // useEffect(() => {
-  //   // If the options were changed, but the data is
-  //   // already loaded start generating the poem
-  //   if (ngrams && !loading) {
-  //     generate();
-  //   }
-  // }, [currentKey]);
-
   useEffect(() => {
     setShowNudge(true);
   }, [currentKey]);

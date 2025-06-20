@@ -23,7 +23,7 @@ export const getDefaultOptions = (): Options => {
     autoplay: false,
     haiku: false,
     dataset: datasets[0].name,
-    seed: getSeed(),
+    seed: typeof window === 'undefined' ? '' : getSeed(),
   };
 };
 

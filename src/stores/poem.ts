@@ -38,41 +38,32 @@ const generateVerse = (signal: AbortSignal) => {
     const rhymePattern = [null, 0, 1, 2];
 
     setTimeout(() => {
-      try {
-        const maxRhymes = rhymePattern.filter((rhyme) => rhyme !== null).length;
+      const maxRhymes = rhymePattern.filter((rhyme) => rhyme !== null).length;
 
-        let currentVerse: Verse = getVerse(
-          ngramsData, // ngramsData
-          4, // linesCount
-          true, // reversed
-          rhymePattern // rhymePattern
-        );
-        let bestVerse: Verse = currentVerse;
+      let currentVerse: Verse = getVerse(ngramsData, 4, true, rhymePattern);
+      let bestVerse: Verse = currentVerse;
 
-        for (let t = 0; t < TRIES_FOR_BEST_VERSE; t++) {
-          const rhymesCount = currentVerse.reduce((sum, line) => {
-            if (line.rhyme) {
-              return sum + 1;
-            }
-            return sum;
-          }, 0);
-
-          if (rhymesCount === maxRhymes) {
-            bestVerse = currentVerse;
-            break;
-          } else if (rhymesCount === maxRhymes - 1) {
-            bestVerse = currentVerse;
-          } else if (rhymesCount === maxRhymes - 2) {
-            bestVerse = currentVerse;
+      for (let t = 0; t < TRIES_FOR_BEST_VERSE; t++) {
+        const rhymesCount = currentVerse.reduce((sum, line) => {
+          if (line.rhyme) {
+            return sum + 1;
           }
+          return sum;
+        }, 0);
 
-          currentVerse = getVerse(ngramsData, 4, true, rhymePattern);
+        if (rhymesCount === maxRhymes) {
+          bestVerse = currentVerse;
+          break;
+        } else if (rhymesCount === maxRhymes - 1) {
+          bestVerse = currentVerse;
+        } else if (rhymesCount === maxRhymes - 2) {
+          bestVerse = currentVerse;
         }
 
-        resolve(bestVerse);
-      } catch (error) {
-        reject(error);
+        currentVerse = getVerse(ngramsData, 4, true, rhymePattern);
       }
+
+      resolve(bestVerse);
     }, 1000);
 
     signal.addEventListener('abort', () => {
