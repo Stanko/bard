@@ -23,7 +23,7 @@ const Footer = ({ className = '', ...props }: ComponentProps) => {
       <Dialog
         onClose={() => setIsAboutOpen(false)}
         isOpen={isAboutOpen}
-        className="px8-font"
+        className="px8-font footer__about-dialog"
       >
         <h2>
           About BARD <a href="https://muffinman.io">by MuffinMan</a>

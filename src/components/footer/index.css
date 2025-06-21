@@ -28,6 +28,10 @@
   margin: 1rem 0;
 }
 
-.footer h2 a {
+.footer__about-dialog h2 a {
   font-size: 0.625em;
+}
+
+.footer__about-dialog p {
+  color: var(--gray-5);
 }

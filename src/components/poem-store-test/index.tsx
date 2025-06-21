@@ -49,14 +49,14 @@ const PoemStoreTest = ({ className = '', ...props }: PoemStoreTestProps) => {
       />
       <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
         <Button
-          onClick={() => {
-            poemStore.generate({
-              key,
-              haiku: false,
-              rhymePattern: [null, 0, 1, 2],
-              verseCount: count,
-            });
-          }}
+        // onClick={() => {
+        //   poemStore.generate({
+        //     key,
+        //     haiku: false,
+        //     rhymePattern: [null, 0, 1, 2],
+        //     verseCount: count,
+        //   });
+        // }}
         >
           Generate
         </Button>

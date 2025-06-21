@@ -1,10 +1,11 @@
 import clsx from 'clsx';
-import { useCallback, useEffect, useState } from 'react';
-import useGeneratePoem from '../../hooks/use-generate-poem';
+import { useCallback, useEffect, useRef, useState } from 'react';
+// import useGeneratePoem from '../../hooks/use-generate-poem';
 import { getSeed } from '../../lib/get-seed';
 import { datasets, type Options } from '../../lib/options';
 import { useNgramsStore } from '../../stores/ngrams';
 import { useOptionsStore } from '../../stores/options';
+import { usePoemStore } from '../../stores/poem';
 import { useSpeechStore } from '../../stores/speech';
 import Button from '../button';
 import Intro from '../intro';
@@ -22,13 +23,22 @@ const optionsToKey = (options: Options) => {
 
 const Poem = ({ className = '', ...props }: PoemProps) => {
   const ngramsStore = useNgramsStore();
+  const {
+    generate: generatePoem,
+    generating: generatingPoem,
+    verses,
+    time,
+    error: poemError,
+    cache,
+  } = usePoemStore();
   const options = useOptionsStore((state) => state.options);
   const setOptions = useOptionsStore((state) => state.setOptions);
   const activeVerse = useSpeechStore((state) => state.activeVerse);
   const stop = useSpeechStore((state) => state.stop);
 
   const [lastGeneratedKey, setLastGeneratedKey] = useState('');
-  const [isGenerateClicked, setIsGenerateClicked] = useState(false);
+  // const [isGenerateClicked, setIsGenerateClicked] = useState(false);
+  const isGenerateClickedRef = useRef(false);
   const [loadingDatasetName, setLoadingDatasetName] = useState('');
   const [showNudge, setShowNudge] = useState(false);
 
@@ -40,23 +50,17 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
 
   const isAlreadyGenerated = lastGeneratedKey === currentKey;
 
-  const {
-    generateVerses,
-    verses,
-    generating: versesGenerating,
-    time,
-    error: versesError,
-  } = useGeneratePoem();
+  const generating =
+    generatingPoem ||
+    ngramsStore.loading[options.dataset] ||
+    loadingDatasetName !== '';
+  const error = poemError || ngramsError;
 
   const generate = useCallback(() => {
     setShowNudge(false);
     setLastGeneratedKey(currentKey);
-    generateVerses();
-  }, [currentKey, generateVerses]);
-
-  useEffect(() => {
-    setShowNudge(true);
-  }, [currentKey]);
+    generatePoem(currentKey, options.haiku);
+  }, [currentKey, generatePoem, options.haiku]);
 
   useEffect(() => {
     if (ngrams && !loading) {
@@ -77,15 +81,31 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
   }, [ngramsError]);
 
   useEffect(() => {
-    if (isGenerateClicked) {
-      setIsGenerateClicked(false);
+    if (cache[currentKey]) {
+      // If the poem is already generated, use the cached version
+      setLastGeneratedKey(currentKey);
       generate();
+    } else if (isGenerateClickedRef.current) {
+      generate();
+    } else if (ngrams) {
+      generate();
+    } else {
+      // If the poem is not generated yet, show the nudge
+      setShowNudge(true);
     }
-  }, [options.seed, isGenerateClicked, generate]);
+
+    isGenerateClickedRef.current = false;
+  }, [currentKey]);
+
+  useEffect(() => {
+    if (!generating && verses.length > 0) {
+      document.title = `Glitchy BARD - ${verses[0][0].line.join(' ')}`;
+    }
+  }, [verses, generating]);
 
   useEffect(() => {
     if (ngramsError) {
-      setIsGenerateClicked(false);
+      isGenerateClickedRef.current = false;
     }
   }, [ngramsError]);
 
@@ -100,23 +120,18 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
     }
 
     if (isAlreadyGenerated) {
+      // Indicate that we need to generate a new poem after the new seed is set
+      // because the seed can be changed by the user
+      isGenerateClickedRef.current = true;
+
       // If the seed hasn't changed, generate a new one
       setOptions({
         seed: getSeed(),
       });
-      // Indicate that we need to generate a new poem after the new seed is set
-      // because the seed can be changed by the user
-      setIsGenerateClicked(true);
     } else {
       generate();
     }
   };
-
-  const generating =
-    versesGenerating ||
-    ngramsStore.loading[options.dataset] ||
-    loadingDatasetName !== '';
-  const error = versesError || ngramsError;
 
   let label = [
     'New',
@@ -126,7 +141,7 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
 
   if (loading) {
     label = 'Loading rhymes...';
-  } else if (versesGenerating) {
+  } else if (generatingPoem) {
     label = 'Generating poem...';
 
     for (const line of verses[verses.length - 1] || []) {
@@ -138,8 +153,9 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
   }
 
   const showIntro = !error && verses.length === 0 && !generating;
-  const showPoem = !error && verses.length > 0;
-  const showTime = !error && time > 0 && !generating;
+  const showPoem = !error && verses.length > 0 && !showNudge;
+  const showTime = !error && time !== 0 && !generating;
+  const showParametersChanged = showNudge && !showIntro && !generating;
 
   const activeDataset = datasets.find(
     (dataset) => dataset.name === options.dataset
@@ -198,13 +214,24 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
                 verses={verses}
               />
               <div className="poem__time muted">
-                Poem generated in {time.toFixed(1)} ms
+                {typeof time === 'string'
+                  ? `Pulled from cache.`
+                  : `Generated in ${time.toFixed(1)} ms.`}
                 <br />
                 You can share the poem by copying the URL.
               </div>
             </>
           )}
         </>
+      )}
+
+      {showParametersChanged && (
+        <p className="muted">
+          Dataset has changed.
+          <br />
+          When you click to generate a new poem, {activeDataset?.name} dataset
+          will be downloaded ({activeDataset?.size} Mb).
+        </p>
       )}
 
       {options.debug && lastGeneratedKey && <div>key: {lastGeneratedKey}</div>}

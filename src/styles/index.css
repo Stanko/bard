@@ -43,14 +43,14 @@
   --bg-color: #d5d8e3;
   --black: #000000;
 
-  --gray-1: rgb(234, 239, 245);
-  --gray-2: rgb(201, 206, 212);
-  --gray-3: rgb(169, 175, 180);
-  --gray-4: rgb(139, 144, 149);
-  --gray-5: rgb(109, 114, 119);
-  --gray-6: rgb(81, 86, 91);
-  --gray-7: rgb(55, 59, 64);
-  --gray-8: rgb(30, 34, 38);
+  --gray-1: oklch(95% 0.01 250);
+  --gray-2: oklch(85% 0.01 250);
+  --gray-3: oklch(75% 0.01 250);
+  --gray-4: oklch(60% 0.01 250);
+  --gray-5: oklch(50% 0.01 250);
+  --gray-6: oklch(40% 0.01 250);
+  --gray-7: oklch(30% 0.01 250);
+  --gray-8: oklch(20% 0.01 250);
 
   --content-max-width: 70rem;
 

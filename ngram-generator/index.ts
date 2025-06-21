@@ -142,6 +142,7 @@ config.forEach((item) => {
     nGramsLengths: [2, 3, 4],
     reversed: true,
     id: item.id,
+    // debug: true,
   });
 });
 console.time(`total time`);

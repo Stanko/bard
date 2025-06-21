@@ -1,15 +1,9 @@
 import { produce } from 'immer';
 import { create } from 'zustand';
 import { useOptionsStore } from './options';
-import { getVerse, type Verse } from '../lib/poem';
+import { getHaiku, getVerse, type Verse } from '../lib/poem';
 import { useNgramsStore } from './ngrams';
-
-type PoemOptions = {
-  haiku: boolean;
-  verseCount: number;
-  rhymePattern: (number | null)[];
-  key: string;
-};
+import type { NGram } from '../lib/ngrams';
 
 export type PoemStore = {
   verses: Verse[];
@@ -20,24 +14,27 @@ export type PoemStore = {
   time: number | 'cached';
   abortController: AbortController | null;
 
-  generate: (options: PoemOptions) => void;
+  generate: (key: string, haiku: boolean) => void;
 };
 
+const VERSE_COUNT = 4;
 const TRIES_FOR_BEST_VERSE = 20;
+const MAX_CACHE_SIZE = 20;
 
-const generateVerse = (signal: AbortSignal) => {
-  const options = useOptionsStore.getState().options;
-  const ngramsData = useNgramsStore.getState().data[options.dataset];
+let timeout: ReturnType<typeof setTimeout> | 0 = 0;
 
+const generateVerse = (
+  rhymePattern: (null | number)[],
+  ngramsData: NGram[],
+  signal: AbortSignal
+) => {
   return new Promise((resolve, reject) => {
     if (signal.aborted) {
       reject(signal.reason);
       return;
     }
 
-    const rhymePattern = [null, 0, 1, 2];
-
-    setTimeout(() => {
+    timeout = setTimeout(() => {
       const maxRhymes = rhymePattern.filter((rhyme) => rhyme !== null).length;
 
       let currentVerse: Verse = getVerse(ngramsData, 4, true, rhymePattern);
@@ -64,7 +61,7 @@ const generateVerse = (signal: AbortSignal) => {
       }
 
       resolve(bestVerse);
-    }, 1000);
+    }, 30);
 
     signal.addEventListener('abort', () => {
       reject(signal.reason);
@@ -80,12 +77,13 @@ export const usePoemStore = create<PoemStore>()((set, get) => ({
   time: 0,
   cache: {},
 
-  generate: async ({
-    verseCount,
-    // haiku,
-    // rhymePattern,
-    key,
-  }) => {
+  generate: async (key: string, haiku: boolean = false) => {
+    const rng = useOptionsStore.getState().rng;
+    const options = useOptionsStore.getState().options;
+    const ngramsData = useNgramsStore.getState().data[options.dataset];
+
+    clearTimeout(timeout);
+
     if (get().cache[key]) {
       set(
         produce((state) => {
@@ -107,41 +105,54 @@ export const usePoemStore = create<PoemStore>()((set, get) => ({
     });
 
     let time = 0;
+    const rhymePattern = rng() < 0.5 ? [null, null, 0, 1] : [null, 0, 1, 2];
 
-    for (let i = 0; i < verseCount; i++) {
-      if (abortController.signal.aborted) {
-        set({
-          generating: false,
-          error: abortController.signal.reason,
-          abortController: null,
-          verses: [],
-          time: 0,
-        });
-        return;
-      }
-
-      let verse;
+    if (haiku) {
       const start = performance.now();
-
-      try {
-        verse = await generateVerse(abortController.signal);
-      } catch (error) {
-        set({
-          generating: false,
-          error: String(error),
-          abortController: null,
-          verses: [],
-          time: 0,
-        });
-        return;
-      }
+      set({
+        verses: [getHaiku(ngramsData)],
+      });
       time += performance.now() - start;
+    } else {
+      for (let i = 0; i < VERSE_COUNT; i++) {
+        if (abortController.signal.aborted) {
+          set({
+            generating: false,
+            error: abortController.signal.reason,
+            abortController: null,
+            verses: [],
+            time: 0,
+          });
+          return;
+        }
 
-      set(
-        produce((state) => {
-          state.verses.push(verse);
-        })
-      );
+        let verse;
+        const start = performance.now();
+
+        try {
+          verse = await generateVerse(
+            rhymePattern,
+            ngramsData,
+            abortController.signal
+          );
+        } catch (error) {
+          set({
+            generating: false,
+            error: String(error),
+            abortController: null,
+            verses: [],
+            time: 0,
+          });
+          return;
+        }
+        time += performance.now() - start;
+
+        set(
+          produce((state) => {
+            state.verses.push(verse);
+          })
+        );
+      }
     }
 
     set(
@@ -150,6 +161,12 @@ export const usePoemStore = create<PoemStore>()((set, get) => ({
         state.time = time;
         state.cache[key] = state.verses;
         state.abortController = null;
+
+        if (Object.keys(state.cache).length > MAX_CACHE_SIZE) {
+          // Remove the oldest entry if cache exceeds max size
+          const oldestKey = Object.keys(state.cache)[0];
+          delete state.cache[oldestKey];
+        }
       })
     );
   },

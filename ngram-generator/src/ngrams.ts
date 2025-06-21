@@ -21,6 +21,7 @@ export const textToSentences = (
 
   return (
     text
+      .toUpperCase()
       // replace 3+ spaces with a full stop to indicate a sentence break
       .replace(/\s\s+/g, '.')
       // replace multiple full stops with a single one
@@ -33,19 +34,18 @@ export const textToSentences = (
       .filter((sentence) => sentence.length > 0)
       .map((sentence) => {
         const words = sentence
-          .toUpperCase()
           // replace long dash and en dash (— and –) with hyphen (-)
           .replace(/(—|–)/g, '-')
-          // keep apostrophes that are in the middle of words
-          .replace(/('\s|\s')/g, '')
-          // keep dashes that are in the middle of words
-          .replace(/(-\s|\s-)/g, '')
+          // remove any character that is not a letter, hyphen, apostrophe, or space
+          .replace(/[^A-Z-'\s]/g, '')
+          // remove apostrophes that are not between two letters
+          .replace(/^'|'$|\s'|'\s/g, ' ')
+          // remove dashes that are not between two letters
+          .replace(/^-|-$|\s-|-\s/g, ' ')
           // replace multiple apostrophes with a single one
           .replace(/'+/g, "'")
           // replace multiple dashes with a single one
           .replace(/-+/g, '-')
-          // remove any character that is not a letter, hyphen, apostrophe, or space
-          .replace(/[^A-Z-'\s]/g, '')
           .split(/\s+/)
           .filter((word) => word.length)
           .filter((word) => !WORDS_TO_REMOVE.includes(word));
