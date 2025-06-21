@@ -103,7 +103,7 @@ export const getVerse = (
 
       if (words.length) {
         verse.push({
-          line: words.join(' '),
+          line: words.map((word) => apostrophed[word] || word).join(' '),
           words,
           wordToRhymeWith: Array.isArray(wordToRhymeWith)
             ? wordToRhymeWith.join(' ')
@@ -241,7 +241,7 @@ export const getHaiku = (
 
   haiku.push({
     words,
-    line: words.join(' '),
+    line: words.map((word) => apostrophed[word] || word).join(' '),
     wordToRhymeWith: '',
     rhyme: null,
   });
