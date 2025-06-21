@@ -197,7 +197,6 @@ const RotaryInput = ({
       tabIndex={0}
       onKeyDown={keyDown}
     >
-      {position}
       <svg
         className="rotary-input__bg"
         shapeRendering="crispEdges"
