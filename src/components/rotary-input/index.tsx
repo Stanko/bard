@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import './index.css';
 
 type RadialInputProps = {
@@ -39,13 +39,27 @@ const RotaryInput = ({
   }, []);
 
   useEffect(() => {
+    const capped = capRadialValue(value);
+
+    if (capped !== position) {
+      onChange(capped);
+    }
+
+    setPosition(capped);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+
+  useEffect(() => {
     if (!isDragging) {
       document.body.classList.remove('dragging');
-      setPosition(value);
+      const cappedValue = capRadialValue(position);
+      setPosition(cappedValue);
+      onChange(cappedValue);
     } else {
       document.body.classList.add('dragging');
     }
-  }, [isDragging, value]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDragging, position]);
 
   // ---- MOUSE EVENTS ---- //
 
@@ -116,10 +130,7 @@ const RotaryInput = ({
     const newValue =
       Math.round(normalizedAngle * MAXIMUM_VALUE) % MAXIMUM_VALUE;
 
-    const cappedValue = capRadialValue(newValue);
-
     setPosition(newValue);
-    onChange(cappedValue);
   };
 
   const dragEnd = () => {
@@ -132,23 +143,26 @@ const RotaryInput = ({
 
   // ----- VALUE HELPERS ----- //
 
-  const capRadialValue = (value: number): number => {
-    if (value < min || value > max) {
-      const distToMin = Math.min(
-        (value - min + MAXIMUM_VALUE) % MAXIMUM_VALUE,
-        (min - value + MAXIMUM_VALUE) % MAXIMUM_VALUE
-      );
+  const capRadialValue = useCallback(
+    (value: number): number => {
+      if (value < min || value > max) {
+        const distToMin = Math.min(
+          (value - min + MAXIMUM_VALUE) % MAXIMUM_VALUE,
+          (min - value + MAXIMUM_VALUE) % MAXIMUM_VALUE
+        );
 
-      const distToMax = Math.min(
-        (value - max + MAXIMUM_VALUE) % MAXIMUM_VALUE,
-        (max - value + MAXIMUM_VALUE) % MAXIMUM_VALUE
-      );
+        const distToMax = Math.min(
+          (value - max + MAXIMUM_VALUE) % MAXIMUM_VALUE,
+          (max - value + MAXIMUM_VALUE) % MAXIMUM_VALUE
+        );
 
-      return distToMin <= distToMax ? min : max;
-    }
+        return distToMin <= distToMax ? min : max;
+      }
 
-    return value;
-  };
+      return value;
+    },
+    [min, max]
+  );
 
   // ---- KEYBOARD EVENTS ---- //
 
@@ -170,7 +184,7 @@ const RotaryInput = ({
     <div
       {...props}
       className={clsx('rotary-input', className, {
-        'rotary-input--shaking': position !== value,
+        'rotary-input--shaking': position !== capRadialValue(position),
       })}
       onMouseDown={mouseDown}
       onTouchStart={touchStart}
@@ -183,6 +197,7 @@ const RotaryInput = ({
       tabIndex={0}
       onKeyDown={keyDown}
     >
+      {position}
       <svg
         className="rotary-input__bg"
         shapeRendering="crispEdges"
