@@ -1,6 +1,7 @@
 import clsx from 'clsx';
-import type { DatasetName } from '../../lib/options';
+import { useEffect, useRef, useState } from 'react';
 import { getSeed } from '../../lib/get-seed';
+import type { DatasetName } from '../../lib/options';
 import { useOptionsStore } from '../../stores/options';
 import DatasetSelector from '../dataset-selector';
 import NgramsState from '../ngrams-state';
@@ -16,6 +17,32 @@ type ControlsProps = React.HTMLAttributes<HTMLDivElement> & {
 const Controls = ({ className = '', ...props }: ControlsProps) => {
   const options = useOptionsStore((state) => state.options);
   const setOptions = useOptionsStore((state) => state.setOptions);
+
+  const [localSeedValue, setLocalSeedValue] = useState<string>(options.seed);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | 0>(0);
+
+  // Using local state in order to debounce the seed input changes,
+  // because poems are automatically generated on every seed change
+  useEffect(() => {
+    clearTimeout(timeoutRef.current);
+
+    if (localSeedValue !== options.seed) {
+      timeoutRef.current = setTimeout(() => {
+        setOptions({ seed: localSeedValue });
+      }, 500);
+    }
+  }, [localSeedValue]);
+
+  useEffect(() => {
+    if (localSeedValue !== options.seed) {
+      clearTimeout(timeoutRef.current);
+      setLocalSeedValue(options.seed);
+    }
+  }, [options.seed]);
+
+  useEffect(() => {
+    clearTimeout(timeoutRef.current);
+  }, []);
 
   return (
     <div {...props} className={clsx('controls', 'px-border', className)}>
@@ -40,9 +67,9 @@ const Controls = ({ className = '', ...props }: ControlsProps) => {
       </div>
       <div className="controls__seed">
         <TextInput
-          value={options.seed}
+          value={localSeedValue}
           onChange={(e) =>
-            setOptions({ seed: (e.target as HTMLInputElement).value })
+            setLocalSeedValue((e.target as HTMLInputElement).value)
           }
           className="green controls__seed-input"
           label="Seed"
