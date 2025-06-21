@@ -58,7 +58,7 @@ export const getVerse = (
     let rhymes: SimilarityResult[] = [];
 
     if (pattern !== null) {
-      const lineToRhymeWith = verse[pattern]?.line;
+      const lineToRhymeWith = verse[pattern]?.words;
 
       if (!lineToRhymeWith) {
         continue;
