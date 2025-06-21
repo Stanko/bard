@@ -24,7 +24,7 @@
   display: none;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 860px) {
   .intro__more-sm {
     display: none;
   }

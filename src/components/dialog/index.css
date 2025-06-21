@@ -30,7 +30,7 @@ html.no-scroll {
   }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 860px) {
   .dialog {
     padding: 4rem 4rem;
   }
@@ -82,7 +82,7 @@ html.no-scroll {
   will-change: transform;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 860px) {
   .dialog__content {
     max-width: 50rem;
     padding: 3rem;
@@ -106,7 +106,7 @@ html.no-scroll {
   right: 2rem;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 860px) {
   .dialog__close-form {
     top: 3.25rem;
     right: 3rem;

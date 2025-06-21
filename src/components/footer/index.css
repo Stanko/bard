@@ -8,7 +8,7 @@
   max-width: var(--content-max-width);
 }
 
-@media (min-width: 800px) {
+@media (min-width: 860px) {
   .footer {
     background-color: transparent;
     backdrop-filter: none;

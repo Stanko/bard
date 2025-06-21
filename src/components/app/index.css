@@ -22,7 +22,7 @@
   }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 860px) {
   #root {
     background-color: transparent;
     backdrop-filter: none;
