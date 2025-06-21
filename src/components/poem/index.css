@@ -56,17 +56,23 @@
 }
 
 .poem__speech-controls,
-.poem__time {
+.poem__time,
+.poem__share {
   opacity: 0;
   animation: fly-in 1000ms ease-out forwards;
 }
 
 .poem__speech-controls {
   animation-delay: 200ms;
+  margin-bottom: 1rem;
 }
 
 .poem__time {
   animation-delay: 400ms;
+}
+
+.poem__share {
+  animation-delay: 600ms;
 }
 
 .poem__error {

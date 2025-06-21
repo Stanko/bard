@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
-// import useGeneratePoem from '../../hooks/use-generate-poem';
 import { getSeed } from '../../lib/get-seed';
 import { datasets, type Options } from '../../lib/options';
 import { useNgramsStore } from '../../stores/ngrams';
@@ -12,6 +11,7 @@ import Intro from '../intro';
 import SpeechControls from '../speech-controls';
 import Verse from '../verse';
 import './index.css';
+import Share from '../share';
 
 type PoemProps = React.HTMLAttributes<HTMLDivElement> & {
   className?: string;
@@ -208,7 +208,7 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
           </div>
 
           {showTime && (
-            <>
+            <div>
               <SpeechControls
                 className="poem__speech-controls"
                 verses={verses}
@@ -217,10 +217,9 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
                 {typeof time === 'string'
                   ? `Pulled from cache.`
                   : `Generated in ${time.toFixed(1)} ms.`}
-                <br />
-                You can share the poem by copying the URL.
               </div>
-            </>
+              <Share className="poem__share" />
+            </div>
           )}
         </>
       )}
