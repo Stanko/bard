@@ -40,7 +40,7 @@ const applyParser = <K extends keyof Options>(
   opts[key] = parsers[key](value);
 };
 
-const getValuesFromHash = (): Options => {
+export const getValuesFromHash = (): Options => {
   const options = getDefaultOptions();
 
   if (typeof window === 'undefined') {

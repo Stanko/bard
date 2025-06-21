@@ -13,7 +13,7 @@ const Share = ({ className = '', ...props }: ShareProps) => {
 
   const shareData = {
     url: window.location.href,
-    title: `Glitchy BARD - ${verses[0][0].line.join(' ')}`,
+    title: `Glitchy BARD - ${verses[0][0].line}`,
   };
 
   useEffect(() => {

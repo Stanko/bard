@@ -2,8 +2,9 @@ import { produce } from 'immer';
 import seedrandom from 'seedrandom';
 import { create } from 'zustand';
 import { getHash } from '../lib/get-hash';
-import { getDefaultOptions, type Options } from '../lib/options';
+import { type Options } from '../lib/options';
 import { random } from '../lib/random';
+import { getValuesFromHash } from '../components/options';
 
 const setHash = (options: Options) => {
   const hash = getHash(options);
@@ -19,11 +20,11 @@ export type OptionsStore = {
   rng: (min?: number, max?: number, integer?: boolean) => number;
 };
 
-const defaultOptions = getDefaultOptions();
-const defaultSeededRNG = seedrandom(defaultOptions.seed);
+const initOptions = getValuesFromHash();
+const defaultSeededRNG = seedrandom(initOptions.seed);
 
 export const useOptionsStore = create<OptionsStore>()((set) => ({
-  options: defaultOptions,
+  options: initOptions,
   setOptions: (newOptions: Partial<Options>) => {
     set(
       produce((state: OptionsStore) => {

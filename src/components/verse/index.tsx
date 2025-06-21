@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { apostrophed } from '../../lib/apostrophed';
 import type { Verse } from '../../lib/poem';
 import { useOptionsStore } from '../../stores/options';
 import './index.css';
@@ -29,7 +28,7 @@ const VerseComponent = ({
           <div key={lineIndex} className="verse__line">
             <div>
               {active && '> '}
-              {line.line.map((word) => apostrophed[word] || word).join(' ')}
+              {line.line}
             </div>
             {options.debug && line.rhyme && (
               <div className="muted verse__debug">

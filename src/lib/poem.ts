@@ -1,4 +1,5 @@
 import { useOptionsStore } from '../stores/options';
+import { apostrophed } from './apostrophed';
 import { get } from './cmu';
 import { generateSentence, type NGram } from './ngrams';
 import { getRhymes, type SimilarityResult } from './rhyme';
@@ -28,7 +29,8 @@ const getSentenceOfLength = (
 };
 
 export type VerseLine = {
-  line: string[];
+  line: string;
+  words: string[];
   rhyme: SimilarityResult | null;
   wordToRhymeWith: string;
 };
@@ -90,7 +92,7 @@ export const getVerse = (
         usedRhymeWords.push(rhyme.rhyme);
       }
 
-      const line = getSentenceOfLength(
+      const words = getSentenceOfLength(
         nGrams,
         rhyme ? rhyme.rhyme : '',
         18,
@@ -99,9 +101,10 @@ export const getVerse = (
         maxTries
       );
 
-      if (line.length) {
+      if (words.length) {
         verse.push({
-          line,
+          line: words.join(' '),
+          words,
           wordToRhymeWith: Array.isArray(wordToRhymeWith)
             ? wordToRhymeWith.join(' ')
             : wordToRhymeWith || '',
@@ -204,7 +207,7 @@ export const getHaiku = (
   const haiku: Verse = [];
   let syllableCount = 0;
   let currentLine = 0;
-  let line: string[] = [];
+  let words: string[] = [];
 
   for (let i = 0; i < sentence.length; i++) {
     const word = sentence[i];
@@ -212,26 +215,36 @@ export const getHaiku = (
     const wordSyllables = countSyllables([word]);
     const currentSyllablesCount = syllables[currentLine];
 
-    line.push(word);
+    words.push(word);
 
     if (syllableCount + wordSyllables > currentSyllablesCount) {
-      haiku.push({ line, wordToRhymeWith: '', rhyme: null });
+      haiku.push({
+        words,
+        line: words.map((word) => apostrophed[word] || word).join(' '),
+        wordToRhymeWith: '',
+        rhyme: null,
+      });
 
       currentLine++;
       syllableCount = 0;
 
       if (currentLine >= 2) {
-        line = sentence.slice(i + 1);
+        words = sentence.slice(i + 1);
         break;
       }
 
-      line = [];
+      words = [];
     }
 
     syllableCount += wordSyllables;
   }
 
-  haiku.push({ line, wordToRhymeWith: '', rhyme: null });
+  haiku.push({
+    words,
+    line: words.join(' '),
+    wordToRhymeWith: '',
+    rhyme: null,
+  });
 
   return haiku;
 };

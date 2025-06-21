@@ -30173,10 +30173,10 @@
       }
     },
     "AIN'T IT": {
-      "total": 11,
+      "total": 12,
       "followUps": {
         "SWEAR": 1,
-        "IF": 1,
+        "IF": 2,
         "THAT": 1,
         "<START>": 2,
         "WOULD": 1,
@@ -45464,12 +45464,11 @@
     "THING ONE": {
       "total": 15,
       "followUps": {
-        "AIN'T'T": 1,
+        "AIN'T": 2,
         "ME": 1,
         "THERE'S": 5,
         "IS": 1,
         "THAT'S": 1,
-        "AIN'T": 1,
         "AFTER": 1,
         "YOU": 1,
         "JUST": 1,
@@ -45477,16 +45476,10 @@
         "CHECK": 1
       }
     },
-    "ONE AIN'T'T": {
-      "total": 1,
+    "ONE AIN'T": {
+      "total": 2,
       "followUps": {
-        "IT": 1
-      }
-    },
-    "AIN'T'T IT": {
-      "total": 1,
-      "followUps": {
-        "IF": 1
+        "IT": 2
       }
     },
     "IT IF": {
@@ -142788,12 +142781,6 @@
       "followUps": {
         "YOU": 2,
         "THEY": 1
-      }
-    },
-    "ONE AIN'T": {
-      "total": 1,
-      "followUps": {
-        "IT": 1
       }
     },
     "IS MOTHERS": {

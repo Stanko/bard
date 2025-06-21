@@ -1,5 +1,3 @@
-import { getSeed } from './get-seed';
-
 export type DatasetName = 'fz' | 'lotr' | 'hp' | 'shkspr' | 'hhgg';
 export type Dataset = {
   name: DatasetName;
@@ -23,7 +21,7 @@ export const getDefaultOptions = (): Options => {
     autoplay: false,
     haiku: false,
     dataset: datasets[0].name,
-    seed: typeof window === 'undefined' ? '' : getSeed(),
+    seed: '',
   };
 };
 
@@ -31,7 +29,6 @@ export type Options = {
   debug: boolean;
   autoplay: boolean;
   haiku: boolean;
-  // rhymePattern
   dataset: DatasetName;
   seed: string;
 };

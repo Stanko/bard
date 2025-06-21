@@ -35776,26 +35776,25 @@
     "IT'S THING ONE": {
       "total": 2,
       "followUps": {
-        "AIN'T'T": 1,
-        "AIN'T": 1
+        "AIN'T": 2
       }
     },
-    "THING ONE AIN'T'T": {
-      "total": 1,
+    "THING ONE AIN'T": {
+      "total": 2,
       "followUps": {
-        "IT": 1
+        "IT": 2
       }
     },
-    "ONE AIN'T'T IT": {
-      "total": 1,
+    "ONE AIN'T IT": {
+      "total": 2,
       "followUps": {
-        "IF": 1
+        "IF": 2
       }
     },
-    "AIN'T'T IT IF": {
-      "total": 1,
+    "AIN'T IT IF": {
+      "total": 2,
       "followUps": {
-        "KITCHEN": 1
+        "KITCHEN": 2
       }
     },
     "IT IF KITCHEN": {
@@ -160033,24 +160032,6 @@
       "total": 2,
       "followUps": {
         "WHEN": 2
-      }
-    },
-    "THING ONE AIN'T": {
-      "total": 1,
-      "followUps": {
-        "IT": 1
-      }
-    },
-    "ONE AIN'T IT": {
-      "total": 1,
-      "followUps": {
-        "IF": 1
-      }
-    },
-    "AIN'T IT IF": {
-      "total": 1,
-      "followUps": {
-        "KITCHEN": 1
       }
     },
     "<END> TONIGHT HOUSE": {

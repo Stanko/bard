@@ -99,7 +99,7 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
 
   useEffect(() => {
     if (!generating && verses.length > 0) {
-      document.title = `Glitchy BARD - ${verses[0][0].line.join(' ')}`;
+      document.title = `Glitchy BARD - ${verses[0][0].line}`;
     }
   }, [verses, generating]);
 

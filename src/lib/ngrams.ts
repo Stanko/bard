@@ -1,4 +1,5 @@
 import { useOptionsStore } from '../stores/options';
+import { apostrophed } from './apostrophed';
 
 export type Item = {
   total: number;
@@ -85,5 +86,5 @@ export const generateSentence = (
     sentence = sentence.reverse();
   }
 
-  return sentence;
+  return sentence.map((word) => apostrophed[word] || word);
 };

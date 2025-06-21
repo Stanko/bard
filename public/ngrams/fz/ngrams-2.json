@@ -28463,7 +28463,7 @@
         "HEARD": 3,
         "WHEN": 2,
         "RED": 2,
-        "AIN'T'T": 1,
+        "AIN'T": 2,
         "AND": 8,
         "THIS": 8,
         "<START>": 28,
@@ -28503,7 +28503,6 @@
         "TAKE": 3,
         "WRITE": 1,
         "HEAVY": 1,
-        "AIN'T": 1,
         "EACH": 2,
         "PORNOGRAPHY": 1,
         "GOOD": 4,
@@ -38527,10 +38526,10 @@
       }
     },
     "AIN'T": {
-      "total": 205,
+      "total": 206,
       "followUps": {
         "HE": 2,
-        "IT": 11,
+        "IT": 12,
         "YOU": 33,
         "I": 46,
         "JUST": 4,
@@ -47103,12 +47102,6 @@
         "OF": 1,
         "ROLL": 1,
         "YEAH": 1
-      }
-    },
-    "AIN'T'T": {
-      "total": 1,
-      "followUps": {
-        "IT": 1
       }
     },
     "SPORT": {

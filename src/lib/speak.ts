@@ -12,28 +12,16 @@ function getVoice(voiceName: string = '') {
     }
   }
 
-  // console.log(voices.map((voice) => voice.name));
-
-  // Priority list of keywords that might indicate a robotic voice
-  const roboticKeywords = [
-    // 'organ', // macos
-    // 'zarvox', // macos
-    // 'robot',
-    // 'zira', // Windows robotic-sounding voice
-    'fred', // macOS somewhat robotic voice
-    'victoria', // Windows somewhat mechanical voice
-    'alex', // macOS slightly robotic voice
-    'microsoft', // Generally more robotic-sounding than natural voices
-  ];
+  const backupVoices = ['fred', 'microsoft'];
 
   // First try to find voices matching our robotic keywords
-  for (const keyword of roboticKeywords) {
-    const roboticVoice = voices.find((voice) =>
+  for (const keyword of backupVoices) {
+    const backupVoice = voices.find((voice) =>
       voice.name.toLowerCase().includes(keyword.toLowerCase())
     );
 
-    if (roboticVoice) {
-      return roboticVoice;
+    if (backupVoice) {
+      return backupVoice;
     }
   }
 
@@ -46,9 +34,8 @@ const textToSpeech = (text: string, voice: string) => {
   utterance.voice = getVoice(voice);
   utterance.lang = 'en-US';
 
-  // Make the voice sound more robotic
-  utterance.pitch = 1.0;
-  utterance.rate = 0.75;
+  utterance.pitch = 1;
+  utterance.rate = 0.85;
 
   speechSynthesis.speak(utterance);
 
@@ -72,7 +59,6 @@ export const speak = (
           instance.addEventListener('end', callback);
           resolve(() => {
             instance.removeEventListener('end', callback);
-            // speechSynthesis.cancel();
           });
         },
         { once: true }
@@ -82,7 +68,6 @@ export const speak = (
       instance.addEventListener('end', callback);
       resolve(() => {
         instance.removeEventListener('end', callback);
-        // speechSynthesis.cancel();
       });
     }
   });

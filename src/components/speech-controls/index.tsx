@@ -74,9 +74,9 @@ const SpeechControls = ({
       // Sing
       if (voice === 'organ') {
         // No punctuation for singing
-        text = verse.map((line) => line.line.join(' ')).join(' ');
+        text = verse.map((line) => line.line).join(' ');
       } else {
-        text = verse.map((line) => line.line.join(' ')).join('. ') + '.';
+        text = verse.map((line) => line.line).join('. ') + '.';
       }
 
       speak(text, voice, () => {
