@@ -108,6 +108,12 @@ html {
   }
 }
 
+@media (min-width: 1800px) {
+  html {
+    font-size: 112.5%;
+  }
+}
+
 body {
   font-size: 1.5rem;
 }
