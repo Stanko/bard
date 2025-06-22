@@ -24,8 +24,10 @@ export const textToSentences = (
       .toUpperCase()
       // replace multiple spaces with a full stop to indicate a sentence break
       .replace(/\s\s+/g, '.')
-      // replace multiple full stops with a single one
+      // replace any occurrences of ?!. with a single full stop which will be used as a sentence break
       .replace(/\.+/g, '.')
+      .replace(/\?+/g, '.')
+      .replace(/!+/g, '.')
       // replace multiple spaces with a single one
       .replace(/\s+/g, ' ')
       // now split into sentences

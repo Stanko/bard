@@ -128,11 +128,11 @@ const config = [
     breakOnNewLines: false,
     id: 'lotr',
   },
-  // {
-  //   filePaths: ['./text/td.txt'],
-  //   breakOnNewLines: true,
-  //   id: 'td',
-  // }
+  {
+    filePaths: ['./text/sp.txt'],
+    breakOnNewLines: false,
+    id: 'sp',
+  },
 ];
 
 console.time(`total time`);

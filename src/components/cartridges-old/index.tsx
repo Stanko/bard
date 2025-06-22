@@ -14,6 +14,7 @@ const images: Record<DatasetName, string> = {
   lotr: './cartridges/green.gif',
   hp: './cartridges/red.gif',
   shkspr: './cartridges/purple.gif',
+  sp: './cartridges/teal.gif',
 };
 
 const CartridgesOld = ({ className = '', ...props }: CartridgesOldProps) => {

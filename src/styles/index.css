@@ -266,13 +266,16 @@ p + p {
   --dark: rgb(113, 58, 147);
 }
 
+.teal {
+  --outline: rgb(0, 80, 80);
+  --light: rgb(0, 220, 220);
+  --mid: rgb(0, 180, 180);
+  --dark: rgb(0, 130, 130);
+}
+
 .muted,
 *:disabled,
 .disabled {
-  /* --outline: rgb(130, 130, 130);
-  --light: rgb(240, 240, 240);
-  --mid: rgb(210, 210, 210);
-  --dark: rgb(180, 180, 180); */
   --outline: var(--gray-4);
   --light: var(--gray-1);
   --mid: var(--gray-2);
@@ -284,7 +287,8 @@ p + p {
 .red,
 .green,
 .muted,
-.yellow {
+.yellow,
+.teal {
   color: var(--outline);
 }
 
@@ -294,7 +298,7 @@ p + p {
   position: absolute;
   left: -200vw;
   opacity: 0;
-  pointer-events: 0;
+  pointer-events: none;
 }
 
 .px-border {

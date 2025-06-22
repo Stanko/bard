@@ -225,6 +225,20 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
         </>
       )}
 
+      {generatingPoem && (
+        <Verse
+          key={verses.length}
+          verse={[
+            {
+              line: 'Generating...',
+              words: [],
+              rhyme: null,
+              wordToRhymeWith: '',
+            },
+          ]}
+        />
+      )}
+
       {showParametersChanged && (
         <p className="muted">
           Dataset has changed.

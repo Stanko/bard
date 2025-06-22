@@ -94,7 +94,7 @@ const Controls = ({ className = '', ...props }: ControlsProps) => {
             setOptions({ dataset: dataset as DatasetName });
           }}
         />
-        <NgramsState />
+        <NgramsState className="controls__ngrams-state" />
       </div>
     </div>
   );

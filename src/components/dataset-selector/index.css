@@ -2,6 +2,21 @@
   display: flex;
   align-items: center;
   gap: 0.125rem;
+  position: relative;
+  padding-top: 0.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.dataset-selector__rotary {
+  margin-right: 7rem;
+  position: relative;
+  z-index: 1;
+}
+
+.dataset-selector__radios {
+  position: absolute;
+  left: 3rem;
+  top: calc(16 * var(--px));
 }
 
 .dataset-selector__label {
@@ -10,18 +25,30 @@
   align-items: center;
   cursor: pointer;
   text-transform: uppercase;
+  transform-origin: left center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 3.25rem;
+  transform: rotate(var(--angle));
 }
 
-.dataset-selector__label:has(input:focus-visible) {
+.dataset-selector__label:has(input:checked):focus-visible,
+.dataset-selector__label:hover {
+  text-decoration: underline;
+}
+
+.dataset-selector__label div {
+  transform-origin: left center;
+  line-height: 1;
+  transform: rotate(var(--opposite-angle));
+}
+
+.dataset-selector__label span {
+  transform: rotate(var(--opposite-angle));
+}
+
+.dataset-selector__label:has(input:focus-visible) div {
   outline: var(--px) solid var(--outline);
-}
-
-.dataset-selector__label:nth-child(1),
-.dataset-selector__label:nth-child(5) {
-  margin-left: calc(-8 * var(--px));
-}
-
-.dataset-selector__label:nth-child(2),
-.dataset-selector__label:nth-child(4) {
-  margin-left: calc(-2 * var(--px));
+  outline-offset: calc(1 * var(--px));
 }

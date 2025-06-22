@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  gap: calc(2 * var(--px));
 }
 
 .ngrams-state__progress {

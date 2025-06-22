@@ -10,6 +10,8 @@ type DatasetSelectorProps = React.HTMLAttributes<HTMLDivElement> & {
   onChange: (value: DatasetName) => void;
 };
 
+const START_ANGLE = -60;
+
 const DatasetSelector = ({
   className = '',
   value,
@@ -29,8 +31,17 @@ const DatasetSelector = ({
         max={datasets.length - 1}
       />
       <div className="dataset-selector__radios">
-        {datasets.map((option) => (
-          <label key={option.value} className="dataset-selector__label">
+        {datasets.map((option, index) => (
+          <label
+            key={option.value}
+            className="dataset-selector__label"
+            style={
+              {
+                '--angle': `${START_ANGLE + index * 30}deg`,
+                '--opposite-angle': `${-(START_ANGLE + index * 30)}deg`,
+              } as React.CSSProperties
+            }
+          >
             <RadioInput
               name="dataset"
               value={option.name.toString()}
@@ -38,7 +49,7 @@ const DatasetSelector = ({
               onChange={() => onChange(option.name as DatasetName)}
               disabled={option.disabled}
             />{' '}
-            {option.name}
+            <div>{option.name}</div>
           </label>
         ))}
       </div>
