@@ -22,7 +22,7 @@ export const textToSentences = (
   return (
     text
       .toUpperCase()
-      // replace 3+ spaces with a full stop to indicate a sentence break
+      // replace multiple spaces with a full stop to indicate a sentence break
       .replace(/\s\s+/g, '.')
       // replace multiple full stops with a single one
       .replace(/\.+/g, '.')

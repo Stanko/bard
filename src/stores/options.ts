@@ -5,6 +5,7 @@ import { getHash } from '../lib/get-hash';
 import { type Options } from '../lib/options';
 import { random } from '../lib/random';
 import { getValuesFromHash } from '../components/options';
+import { getSeed } from '../lib/get-seed';
 
 const setHash = (options: Options) => {
   const hash = getHash(options);
@@ -21,6 +22,11 @@ export type OptionsStore = {
 };
 
 const initOptions = getValuesFromHash();
+
+if (!initOptions.seed) {
+  initOptions.seed = getSeed();
+}
+
 const defaultSeededRNG = seedrandom(initOptions.seed);
 
 export const useOptionsStore = create<OptionsStore>()((set) => ({
