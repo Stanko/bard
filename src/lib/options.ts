@@ -15,20 +15,35 @@ export const datasets: Dataset[] = [
   { name: 'hhgg', value: 4, theme: 'yellow', size: 4 },
 ];
 
-export const getDefaultOptions = (): Options => {
+export type HashOptions = {
+  dataset: DatasetName;
+  haiku: boolean;
+  seed: string;
+};
+
+export const getDefaultHashOptions = (): HashOptions => {
   return {
-    debug: false,
-    autoplay: false,
-    haiku: false,
     dataset: datasets[0].name,
+    haiku: false,
     seed: '',
   };
 };
 
-export type Options = {
+export type LocalStorageOptions = {
   debug: boolean;
   autoplay: boolean;
-  haiku: boolean;
-  dataset: DatasetName;
-  seed: string;
+};
+
+export const getDefaultLocalStorageOptions = (): LocalStorageOptions => {
+  if (typeof window === 'undefined') {
+    return {
+      debug: false,
+      autoplay: false,
+    };
+  }
+
+  return {
+    debug: localStorage.getItem('debug') === 'true',
+    autoplay: localStorage.getItem('autoplay') === 'true',
+  };
 };

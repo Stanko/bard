@@ -2,12 +2,16 @@ import { produce } from 'immer';
 import seedrandom from 'seedrandom';
 import { create } from 'zustand';
 import { getHash } from '../lib/get-hash';
-import { type Options } from '../lib/options';
+import {
+  getDefaultLocalStorageOptions,
+  type HashOptions,
+  type LocalStorageOptions,
+} from '../lib/options';
 import { random } from '../lib/random';
 import { getValuesFromHash } from '../components/options';
 import { getSeed } from '../lib/get-seed';
 
-const setHash = (options: Options) => {
+const setHash = (options: HashOptions) => {
   const hash = getHash(options);
 
   if (window.location.hash.slice(1) !== hash) {
@@ -16,14 +20,18 @@ const setHash = (options: Options) => {
 };
 
 export type OptionsStore = {
-  options: Options;
-  setOptions: (newOptions: Partial<Options>) => void;
+  options: HashOptions;
+  localOptions: LocalStorageOptions;
+  setOptions: (newOptions: Partial<HashOptions>) => void;
+  setLocalOptions: (newOptions: Partial<LocalStorageOptions>) => void;
   rng: (min?: number, max?: number, integer?: boolean) => number;
 };
 
+const initLocalOptions: LocalStorageOptions = getDefaultLocalStorageOptions();
 const initOptions = getValuesFromHash();
 
 if (!initOptions.seed) {
+  // If no seed is provided, generate a random one
   initOptions.seed = getSeed();
 }
 
@@ -31,7 +39,8 @@ const defaultSeededRNG = seedrandom(initOptions.seed);
 
 export const useOptionsStore = create<OptionsStore>()((set) => ({
   options: initOptions,
-  setOptions: (newOptions: Partial<Options>) => {
+  localOptions: initLocalOptions,
+  setOptions: (newOptions: Partial<HashOptions>) => {
     set(
       produce((state: OptionsStore) => {
         const options = { ...state.options, ...newOptions };
@@ -44,6 +53,17 @@ export const useOptionsStore = create<OptionsStore>()((set) => ({
         };
 
         setHash(options);
+      })
+    );
+  },
+  setLocalOptions: (newOptions: Partial<LocalStorageOptions>) => {
+    set(
+      produce((state: OptionsStore) => {
+        const localOptions = { ...state.localOptions, ...newOptions };
+        state.localOptions = localOptions;
+
+        localStorage.setItem('debug', String(localOptions.debug));
+        localStorage.setItem('autoplay', String(localOptions.autoplay));
       })
     );
   },

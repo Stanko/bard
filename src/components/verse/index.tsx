@@ -14,7 +14,7 @@ const VerseComponent = ({
   active,
   ...props
 }: VerseProps) => {
-  const options = useOptionsStore((state) => state.options);
+  const localOptions = useOptionsStore((state) => state.localOptions);
 
   return (
     <div
@@ -30,7 +30,7 @@ const VerseComponent = ({
               {active && '> '}
               {line.line}
             </div>
-            {options.debug && line.rhyme && (
+            {localOptions.debug && line.rhyme && (
               <div className="muted verse__debug">
                 <div>
                   <div>- {line.rhyme.word}</div>

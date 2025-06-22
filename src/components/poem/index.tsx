@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { getSeed } from '../../lib/get-seed';
-import { datasets, type Options } from '../../lib/options';
+import { datasets, type HashOptions } from '../../lib/options';
 import { useNgramsStore } from '../../stores/ngrams';
 import { useOptionsStore } from '../../stores/options';
 import { usePoemStore } from '../../stores/poem';
@@ -17,7 +17,7 @@ type PoemProps = React.HTMLAttributes<HTMLDivElement> & {
   className?: string;
 };
 
-const optionsToKey = (options: Options) => {
+const optionsToKey = (options: HashOptions) => {
   return `${options.seed}-${options.dataset}-${options.haiku}`;
 };
 
@@ -33,6 +33,7 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
   } = usePoemStore();
   const options = useOptionsStore((state) => state.options);
   const setOptions = useOptionsStore((state) => state.setOptions);
+  const localOptions = useOptionsStore((state) => state.localOptions);
   const activeVerse = useSpeechStore((state) => state.activeVerse);
   const stop = useSpeechStore((state) => state.stop);
 
@@ -187,7 +188,7 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
             Something went wrong, please trying oiling me a little bit and try
             again.
           </div>
-          {options.debug && <pre className="poem__error">{error}</pre>}
+          {localOptions.debug && <pre className="poem__error">{error}</pre>}
         </div>
       )}
 
@@ -233,7 +234,9 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
         </p>
       )}
 
-      {options.debug && lastGeneratedKey && <div>key: {lastGeneratedKey}</div>}
+      {localOptions.debug && lastGeneratedKey && (
+        <div>key: {lastGeneratedKey}</div>
+      )}
     </div>
   );
 };

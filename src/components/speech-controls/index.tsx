@@ -57,10 +57,10 @@ const SpeechControls = ({
     stop,
     setRemoveEndListener,
   } = useSpeechStore();
-  const { options } = useOptionsStore();
+  const localOptions = useOptionsStore((state) => state.localOptions);
 
   useEffect(() => {
-    if (options.autoplay && verses.length > 0) {
+    if (localOptions.autoplay && verses.length > 0) {
       play();
     }
   }, [verses]);

@@ -18,6 +18,9 @@ const Controls = ({ className = '', ...props }: ControlsProps) => {
   const options = useOptionsStore((state) => state.options);
   const setOptions = useOptionsStore((state) => state.setOptions);
 
+  const localOptions = useOptionsStore((state) => state.localOptions);
+  const setLocalOptions = useOptionsStore((state) => state.setLocalOptions);
+
   const [localSeedValue, setLocalSeedValue] = useState<string>(options.seed);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | 0>(0);
 
@@ -50,13 +53,13 @@ const Controls = ({ className = '', ...props }: ControlsProps) => {
         <Toggle
           label="Debug"
           className="red"
-          checked={options.debug}
-          onChange={(checked) => setOptions({ debug: checked })}
+          checked={localOptions.debug}
+          onChange={(checked) => setLocalOptions({ debug: checked })}
         />
         <Toggle
           label="Autoplay"
-          checked={options.autoplay}
-          onChange={(checked) => setOptions({ autoplay: checked })}
+          checked={localOptions.autoplay}
+          onChange={(checked) => setLocalOptions({ autoplay: checked })}
         />
         <Toggle
           label="Haiku"

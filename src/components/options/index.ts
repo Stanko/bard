@@ -2,9 +2,9 @@ import { useCallback, useEffect } from 'react';
 import { getHash } from '../../lib/get-hash';
 import {
   datasets,
-  getDefaultOptions,
+  getDefaultHashOptions,
   type DatasetName,
-  type Options,
+  type HashOptions,
 } from '../../lib/options';
 import { getSeed } from '../../lib/get-seed';
 import { useOptionsStore } from '../../stores/options';
@@ -12,10 +12,8 @@ import { useOptionsStore } from '../../stores/options';
 const datasetKeys = datasets.map((d) => d.name);
 
 const parsers: {
-  [K in keyof Options]: (value: string) => Options[K];
+  [K in keyof HashOptions]: (value: string) => HashOptions[K];
 } = {
-  debug: (value: string): boolean => value === 'true',
-  autoplay: (value: string): boolean => value === 'true',
   haiku: (value: string): boolean => value === 'true',
   dataset: (value: string): DatasetName => {
     if (datasetKeys.includes(value as DatasetName)) {
@@ -31,17 +29,8 @@ const parsers: {
   },
 };
 
-// Helper function to maintain type safety
-const applyParser = <K extends keyof Options>(
-  key: K,
-  value: string,
-  opts: Options
-): void => {
-  opts[key] = parsers[key](value);
-};
-
-export const getValuesFromHash = (): Options => {
-  const options = getDefaultOptions();
+export const getValuesFromHash = (): HashOptions => {
+  const options = getDefaultHashOptions();
 
   if (typeof window === 'undefined') {
     return options;
@@ -55,10 +44,10 @@ export const getValuesFromHash = (): Options => {
       return options;
     }
 
-    const key = untypedKey as keyof Options;
+    const key = untypedKey as keyof HashOptions;
 
     if (key in parsers) {
-      applyParser(key, value, options);
+      parsers[key](value);
     }
   });
 
