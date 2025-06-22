@@ -29,6 +29,15 @@ const parsers: {
   },
 };
 
+// Helper function to maintain type safety
+const applyParser = <K extends keyof HashOptions>(
+  key: K,
+  value: string,
+  opts: HashOptions
+): void => {
+  opts[key] = parsers[key](value);
+};
+
 export const getValuesFromHash = (): HashOptions => {
   const options = getDefaultHashOptions();
 
@@ -40,6 +49,7 @@ export const getValuesFromHash = (): HashOptions => {
 
   hash.split('/').forEach((part) => {
     const [untypedKey, value] = part.split(':');
+
     if (!untypedKey || !value) {
       return options;
     }
@@ -47,7 +57,7 @@ export const getValuesFromHash = (): HashOptions => {
     const key = untypedKey as keyof HashOptions;
 
     if (key in parsers) {
-      parsers[key](value);
+      applyParser(key, value, options);
     }
   });
 
