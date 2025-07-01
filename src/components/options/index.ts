@@ -23,7 +23,8 @@ const parsers: {
   },
   seed: (value: string): string => {
     if (typeof value === 'string') {
-      return value;
+      // decode URI components to handle special characters
+      return decodeURIComponent(value);
     }
     return getSeed();
   },

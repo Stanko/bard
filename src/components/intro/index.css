@@ -10,6 +10,7 @@
   position: relative;
   display: inline-block;
   transform: rotate(90deg) translateX(1px);
+  margin-left: 0.5rem;
 }
 
 .intro--expanded .intro__expand-button span {
