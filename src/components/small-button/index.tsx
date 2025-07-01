@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { play } from '../../lib/sounds';
 import './index.css';
 
 type SmallButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -14,7 +15,13 @@ const SmallButton = ({
   ...props
 }: SmallButtonProps) => {
   return (
-    <button {...props} className={clsx('small-button', className)}>
+    <button
+      {...props}
+      onMouseDown={() => {
+        play('click');
+      }}
+      className={clsx('small-button', className)}
+    >
       <div className="small-button__bg-wrapper">
         <svg
           className="small-button__bg"

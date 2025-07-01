@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { initSounds } from '../../lib/sounds';
 import Controls from '../controls';
 import Footer from '../footer';
 import Header from '../header';
@@ -9,6 +11,10 @@ type AppProps = {
 };
 
 const App = ({ addGoatCounter = false }: AppProps) => {
+  useEffect(() => {
+    initSounds();
+  });
+
   return (
     <>
       <main className="app">

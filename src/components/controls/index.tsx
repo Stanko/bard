@@ -62,6 +62,12 @@ const Controls = ({ className = '', ...props }: ControlsProps) => {
           onChange={(checked) => setLocalOptions({ autoplay: checked })}
         />
         <Toggle
+          label="SFX"
+          className="purple"
+          checked={localOptions.sfx}
+          onChange={(checked) => setLocalOptions({ sfx: checked })}
+        />
+        <Toggle
           label="Haiku"
           className="yellow"
           checked={options.haiku}

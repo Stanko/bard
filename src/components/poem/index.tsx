@@ -8,10 +8,10 @@ import { usePoemStore } from '../../stores/poem';
 import { useSpeechStore } from '../../stores/speech';
 import Button from '../button';
 import Intro from '../intro';
+import Share from '../share';
 import SpeechControls from '../speech-controls';
 import Verse from '../verse';
 import './index.css';
-import Share from '../share';
 
 type PoemProps = React.HTMLAttributes<HTMLDivElement> & {
   className?: string;
@@ -38,7 +38,6 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
   const stop = useSpeechStore((state) => state.stop);
 
   const [lastGeneratedKey, setLastGeneratedKey] = useState('');
-  // const [isGenerateClicked, setIsGenerateClicked] = useState(false);
   const isGenerateClickedRef = useRef(false);
   const [loadingDatasetName, setLoadingDatasetName] = useState('');
   const [showNudge, setShowNudge] = useState(false);
@@ -59,6 +58,7 @@ const Poem = ({ className = '', ...props }: PoemProps) => {
 
   const generate = useCallback(() => {
     setShowNudge(false);
+    window.speechSynthesis.cancel();
     setLastGeneratedKey(currentKey);
     generatePoem(currentKey, options.haiku);
   }, [currentKey, generatePoem, options.haiku]);

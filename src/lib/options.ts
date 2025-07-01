@@ -33,6 +33,7 @@ export const getDefaultHashOptions = (): HashOptions => {
 export type LocalStorageOptions = {
   debug: boolean;
   autoplay: boolean;
+  sfx: boolean;
 };
 
 export const getDefaultLocalStorageOptions = (): LocalStorageOptions => {
@@ -40,11 +41,13 @@ export const getDefaultLocalStorageOptions = (): LocalStorageOptions => {
     return {
       debug: false,
       autoplay: false,
+      sfx: true,
     };
   }
 
   return {
     debug: localStorage.getItem('debug') === 'true',
     autoplay: localStorage.getItem('autoplay') === 'true',
+    sfx: localStorage.getItem('sfx') === 'true',
   };
 };

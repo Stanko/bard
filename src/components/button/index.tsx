@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { play } from '../../lib/sounds';
 import './index.css';
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -8,7 +9,13 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const Button = ({ className = '', children, ...props }: ButtonProps) => {
   return (
-    <button {...props} className={clsx('button', className)}>
+    <button
+      onMouseDown={() => {
+        play('click');
+      }}
+      {...props}
+      className={clsx('button', className)}
+    >
       <span className="button__edge">
         <svg
           className="button__edge-bg button__edge-bg--left"

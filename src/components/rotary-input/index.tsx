@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import './index.css';
+import { play } from '../../lib/sounds';
 
 type RadialInputProps = {
   className?: string;
@@ -60,6 +61,10 @@ const RotaryInput = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDragging, position]);
+
+  useEffect(() => {
+    play('rotary');
+  }, [position]);
 
   // ---- MOUSE EVENTS ---- //
 

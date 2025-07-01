@@ -64,6 +64,7 @@ export const useOptionsStore = create<OptionsStore>()((set) => ({
 
         localStorage.setItem('debug', String(localOptions.debug));
         localStorage.setItem('autoplay', String(localOptions.autoplay));
+        localStorage.setItem('sfx', String(localOptions.sfx));
       })
     );
   },
