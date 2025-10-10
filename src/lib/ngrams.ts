@@ -1,4 +1,5 @@
 import { useOptionsStore } from '../stores/options';
+import { MIN_RHYME_TAIL_LENGTH } from './rhyme';
 
 export type Item = {
   total: number;
@@ -44,7 +45,7 @@ export const generateSentence = (
     return [];
   }
 
-  if (startWord && startWord.length < 3) {
+  if (startWord && startWord.length < MIN_RHYME_TAIL_LENGTH) {
     startWord = '';
   }
 

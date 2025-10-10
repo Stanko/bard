@@ -73,7 +73,7 @@ const areWordsRhyming = (
 };
 
 // At the top of getRhymes
-const MIN_RHYME_TAIL_LENGTH = 2;
+export const MIN_RHYME_TAIL_LENGTH = 2;
 
 export const getRhymes = (
   word: string | string[],
