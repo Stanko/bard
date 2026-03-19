@@ -89,7 +89,7 @@ const Footer = ({ className = '', ...props }: ComponentProps) => {
         <p>
           I have a <s>todo</s> wishlist of stuff I want to add, and hopefully
           I'll find time to do it. You can find the code on{' '}
-          <a href="htthttps://github.com/Stanko/bard/">GitHub</a>. If you have
+          <a href="https://github.com/Stanko/bard/">GitHub</a>. If you have
           any ideas, feel free to open an issue or a pull request.
         </p>
         <p>
